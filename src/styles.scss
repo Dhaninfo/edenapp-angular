@@ -1,1 +1,271 @@
-/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap');
+body {
+    font-family: Open Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+    font-size: 16px;
+    letter-spacing: 0.6px;
+}
+
+.navbar-brand img {
+    width: 5rem;
+}
+
+.nav-link {
+    color: rgb(64, 64, 64);
+    font-weight: 600;
+}
+
+.nav-link:hover {
+    color: rgb(73, 174, 78) !important;
+}
+
+.Service {
+    background-color: rgb(73, 174, 78);
+    min-height: 100vh;
+}
+
+.Service-left .btn-link {
+    color: rgb(73, 174, 78) !important;
+}
+
+.Service-left .btn-link:hover {
+    text-decoration: underline !important;
+}
+
+.Service-left hr {
+    width: 80px;
+    height: 3px;
+    background-color: rgb(73, 174, 78);
+}
+
+.price-tab a {
+    text-decoration: none !important;
+}
+
+.price-tab .card {
+    border: 2px solid #ddd;
+    height: 100%;
+}
+
+.price-tab a:hover .card {
+    border-color: rgb(73, 174, 78);
+}
+
+.price-tab a:focus .card {
+    border-color: rgb(73, 174, 78);
+}
+
+.custom-checkbox .custom-control-input:checked~.custom-control-label::before {
+    background-color: rgb(73, 174, 78);
+}
+
+.custom-checkbox img {
+    width: 20px;
+}
+
+.datepic-img {
+    position: absolute;
+    width: 25px;
+    top: 7px;
+    left: 5px;
+}
+
+.btn-book {
+    text-align: center;
+    font-weight: 700;
+    line-height: 1;
+    background-color: rgb(73, 174, 78);
+    color: rgb(255, 255, 255);
+    border-width: 2px;
+    border-radius: 0.5rem;
+    padding: 0.625rem 1.25rem;
+    border-color: rgb(73, 174, 78);
+}
+
+.map-link a {
+    text-decoration: none !important;
+}
+
+.btn-bottom {
+    border-bottom: 2px solid rgb(73, 174, 78) !important;
+}
+
+.Service-right {
+    position: sticky;
+    position: -webkit-sticky;
+    display: flex;
+    width: 100%;
+    top: 10px;
+}
+
+.navigation__link {
+    display: block;
+    color: #000;
+    text-decoration: none;
+    padding: 15px 0 10px;
+    font-weight: 400;
+}
+
+.navigation__link:hover {
+    color: #000;
+    font-weight: bold;
+}
+
+.navigation__link.active {
+    font-weight: bold;
+    border-bottom: 3px solid rgb(73, 174, 78) !important;
+}
+
+.sub-footer {
+    background-color: rgb(38, 38, 38);
+    color: rgb(255, 255, 255);
+}
+
+.sub-footer p {
+    font-size: 16px;
+    letter-spacing: .05em;
+    line-height: 1.5;
+}
+
+.Logo__StyledLogo-tbkqrn-0 {
+    width: 200px;
+    color: #fff !important;
+}
+
+.sub-footer .list-inline a {
+    font-size: 16px;
+    color: #fff;
+}
+
+.footer-menu {
+    list-style: none;
+}
+
+.footer-menu a {
+    font-size: 16px;
+    color: #fff;
+    font-weight: bold;
+    display: inline-block;
+}
+
+.jffLxe {
+    background-color: rgb(0, 0, 0);
+    text-transform: uppercase;
+}
+
+.Footer-Terms {
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff !important;
+}
+
+.copyright {
+    font-size: 14px;
+    color: #fff;
+}
+
+.social-icon {
+    display: inline-block;
+    text-decoration: none !important;
+    color: #fff !important;
+    font-size: 20px;
+}
+
+.social-icon svg {
+    fill: currentcolor;
+    margin-right: 1.25rem;
+    width: 2rem;
+    height: 2rem;
+}
+
+.badgelight img {
+    height: 41px;
+    width: 108px;
+}
+p {
+    // color: #5f5f5f;
+    line-height: 1.5 !important;
+}
+.quote-div .form-control:focus {
+    color: #495057;
+    background-color: #fff;
+    border-color: #000;
+    outline: 0;
+    box-shadow: 0 0 0 1px #000;
+}
+
+.quote-form {
+    border-radius: 6px;
+}
+
+.quote-form .bg-success {
+    border-radius: 0 6px 6px 0;
+}
+.change-button{
+    text-decoration: none !important;
+}
+
+/*tab css */
+
+.nav-pills .nav-link {
+    border-radius: 2px;
+    color: #495057;
+    transition: color .2s ease-out, box-shadow .2s;
+    border: 2px solid #ddd;
+    box-shadow: 3px 5px 5px rgba(0, 0, 0, 0.05);
+    border-radius: 6px;
+}
+
+.nav-pills .nav-link:hover {
+    color: #fff !important;
+    border: 2px solid #49ae4e;
+}
+
+.nav-pills .nav-item {
+    width: 50%;
+    padding: 10px;
+}
+
+.nav-pills.pills-dark .nav-link.active {
+    background-color: #49ae4e!important;
+    color: #fff;
+    border: 2px solid #49ae4e;
+}
+
+.nav-pills.pills-dark .nav-link:not(.active):hover {
+    color: #1d1e22 !important;
+}
+.stripe-form form{
+    width:97% !important;
+    margin:0 auto;
+}
+.CardField .CardField--ltr{
+    background: #f4f4f4 !important;
+}
+.name-cls::-webkit-input-placeholder {
+    font-weight: 300 !important;
+}
+.name-cls::-moz-placeholder {
+    font-weight: 300!important;
+}
+.name-cls::-ms-input-placeholder {
+    font-weight: 300!important;
+}
+.border-class{
+    border: 2px solid #49ae4e !important;
+}
+.text-brand-lightgreen {
+    --text-opacity: 1;
+    color: #49ae4e;
+    color: rgba(73,174,78,var(--text-opacity));
+}
+.card, .card-header{
+    border-radius: 8px !important;
+}
+@media (min-width:1280px) {
+    .Service-container {
+        max-width: 1280px;
+        margin: auto;
+    }
+}
+
+@media (min-width: 320px) and (max-width: 640px) {}

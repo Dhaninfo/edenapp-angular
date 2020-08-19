@@ -1,0 +1,69 @@
+.grid-wrapper label {
+    width: 100%;
+    height: 100%;
+}
+
+.card-input-element {
+    display: none;
+}
+
+.card-input {
+    margin: 10px;
+    padding: 00px;
+    border:2px solid #eee;
+    box-shadow: 8px 8px 16px 0 rgba(0, 0, 0, 0.05),
+      -8px -8px 12px 0 rgba(255, 255, 255, 0.1);
+}
+
+.card-input:hover {
+    cursor: pointer;
+}
+
+.card-input-element:checked + .card-input {
+    border:2px solid #2ecc71;
+}
+.cpGsUy {
+    color: rgb(64, 64, 64);
+    font-weight: 600;
+    font-size: 1.125rem;
+    margin-bottom: 1.25rem !important;
+}
+.evQnBr {
+    font-size: 0.875rem;
+    color: rgb(64, 64, 64);
+}
+.w-24 {
+    width: 6rem;
+}
+.w-20 {
+    width: 5rem;
+}
+.w-15 {
+    width: 3.75rem;
+}
+.text-brand-orange {
+    --text-opacity: 1;
+    color: #f76800;
+    color: rgba(247,104,0,var(--text-opacity));
+}
+
+.fill-current {
+    fill: currentColor;
+}
+.text-brand-teal {
+    --text-opacity: 1;
+    color: #14b3b6;
+    color: rgba(20,179,182,var(--text-opacity));
+}
+
+.text-brand-lightgreen {
+    --text-opacity: 1;
+    color: #49ae4e;
+    color: rgba(73,174,78,var(--text-opacity));
+} 
+.city_sidewalk{
+    width: 100%;
+}
+.price{
+    font-size: 22px;
+}
