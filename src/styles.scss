@@ -1,12 +1,14 @@
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap');
-body {
-    font-family: Open Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
-    font-size: 16px;
-    letter-spacing: 0.6px;
-}
-
+// @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap');
+// body {
+//     font-family: Open Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+//     font-size: 16px;
+//     letter-spacing: 0.6px;
+// }
+body{
+    font-family: 'Quicksand', sans-serif;
+  }
 .navbar-brand img {
-    width: 5rem;
+    width: 7rem;
 }
 
 .nav-link {
@@ -22,6 +24,12 @@ body {
     background-color: rgb(73, 174, 78);
     min-height: 100vh;
 }
+.Service .card{
+    border-radius: 10px;
+}
+.Service .card-header{
+    border-radius: 10px 10px 0 0;
+}
 
 .Service-left .btn-link {
     color: rgb(73, 174, 78) !important;
@@ -35,6 +43,12 @@ body {
     width: 80px;
     height: 3px;
     background-color: rgb(73, 174, 78);
+}
+.Service-left p{
+    font-size: 1rem;
+    text-align: center;
+    display: block;
+    color: rgb(64, 64, 64);
 }
 
 .price-tab a {
@@ -53,9 +67,16 @@ body {
 .price-tab a:focus .card {
     border-color: rgb(73, 174, 78);
 }
-
+.custom-control-label::before {
+   
+    background-color: #fff;
+    border: 1.5px solid rgb(73, 174, 78);;
+}
 .custom-checkbox .custom-control-input:checked~.custom-control-label::before {
     background-color: rgb(73, 174, 78);
+}
+.custom-checkbox .custom-control-label::before {
+    border-radius: .1rem;
 }
 
 .custom-checkbox img {
@@ -94,7 +115,7 @@ body {
     position: -webkit-sticky;
     display: flex;
     width: 100%;
-    top: 10px;
+    top:5px;
 }
 
 .navigation__link {
@@ -181,10 +202,7 @@ body {
     height: 41px;
     width: 108px;
 }
-p {
-    // color: #5f5f5f;
-    line-height: 1.5 !important;
-}
+
 .quote-div .form-control:focus {
     color: #495057;
     background-color: #fff;
@@ -200,9 +218,7 @@ p {
 .quote-form .bg-success {
     border-radius: 0 6px 6px 0;
 }
-.change-button{
-    text-decoration: none !important;
-}
+
 
 /*tab css */
 
@@ -234,37 +250,167 @@ p {
 .nav-pills.pills-dark .nav-link:not(.active):hover {
     color: #1d1e22 !important;
 }
-.stripe-form form{
-    width:97% !important;
-    margin:0 auto;
+
+
+.yard-services{
+    border:2px solid #ddd;
 }
-.CardField .CardField--ltr{
-    background: #f4f4f4 !important;
+.doller-icon{
+    font-size: 30px;
+    font-weight: bold;
+    color: #2ecc71;
+    top: 3px;
+    left: 15px;
 }
-.name-cls::-webkit-input-placeholder {
-    font-weight: 300 !important;
+.serices-info{
+    min-height:50px;
+    max-height: 200px;
+    overflow-y: auto;
 }
-.name-cls::-moz-placeholder {
-    font-weight: 300!important;
+.myaccordion {
+    max-width: 500px;
+    box-shadow: 0 0 1px rgba(0,0,0,0.2);
+    
+  }
+  .myaccordion .card:first-child .card-header{
+    border-top: 1px solid #eee !important; 
+  }
+  .myaccordion .card,
+  .myaccordion .card:last-child .card-header {
+    border: none;
+    border-radius: 0px !important;
+  }
+  
+  .myaccordion .card-header {
+    border-bottom-color: #EDEFF0;
+    background: transparent;
+    padding: 5px 10px;
+    border-top: 1px solid #eee;
+    border-radius: 0px !important;
+  }
+  .myaccordion .card-body{
+    border-bottom: 1px solid #eee;
+  }
+  .myaccordion .fa-stack {
+    font-size: 14px;
+    color: #2ecc71;
+  }
+  
+  .myaccordion .card-body .file-div {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+  }
+  .file {
+    position: absolute;
+    font-size: 50px;
+    opacity: 0;
+    right: 0;
+    top: 0;
+    cursor: pointer;
+  }
+
+
+  .myaccordion .card-header .btn {
+    width: 100%;
+    font-weight: bold;
+    text-decoration: none !important;
+    padding: 0;
+    background: none;
+  }
+  
+  .myaccordion .btn:hover,
+  .myaccordion .btn:focus {
+    text-decoration: none;
+    box-shadow: none !important;
+  }
+  
+  .myaccordion li + li {
+    margin-top: 10px;
+  }
+  .upload-img{
+      width:80px;
+      height:80px;
+      border: 2px solid #ddd;
+      display: inline-block;
+      margin:3px;
+  }
+
+/*checkbox and Rediobox card*/
+
+ 
+.grid-wrapper label {
+    width: 100%;
+    height: 100%;
 }
-.name-cls::-ms-input-placeholder {
-    font-weight: 300!important;
+
+.card-input-element {
+    display: none;
 }
-.border-class{
-    border: 2px solid #49ae4e !important;
+
+.card-input {
+    margin: 10px;
+    padding: 00px;
+    border:2px solid #eee;
+    box-shadow: 8px 8px 16px 0 rgba(0, 0, 0, 0.05),
+      -8px -8px 12px 0 rgba(255, 255, 255, 0.1);
 }
+
+.card-input:hover {
+    cursor: pointer;
+}
+
+.card-input-element:checked + .card-input {
+    border:2px solid #2ecc71;
+}
+.cpGsUy {
+    color: rgb(64, 64, 64);
+    font-weight: 600;
+    font-size: 1.125rem;
+    margin-bottom: 1.25rem !important;
+}
+.evQnBr {
+    font-size: 0.875rem;
+    color: rgb(64, 64, 64);
+}
+.w-24 {
+    width: 6rem;
+}
+.w-20 {
+    width: 5rem;
+}
+.w-15 {
+    width: 3.75rem;
+}
+.text-brand-orange {
+    --text-opacity: 1;
+    color: #f76800;
+    color: rgba(247,104,0,var(--text-opacity));
+}
+
+.fill-current {
+    fill: currentColor;
+}
+.text-brand-teal {
+    --text-opacity: 1;
+    color: #14b3b6;
+    color: rgba(20,179,182,var(--text-opacity));
+}
+
 .text-brand-lightgreen {
     --text-opacity: 1;
     color: #49ae4e;
     color: rgba(73,174,78,var(--text-opacity));
-}
-.card, .card-header{
-    border-radius: 8px !important;
-}
+} 
+
 @media (min-width:1280px) {
     .Service-container {
         max-width: 1280px;
         margin: auto;
+    }
+    .Service-right {
+        
+        top:70px;
     }
 }
 
