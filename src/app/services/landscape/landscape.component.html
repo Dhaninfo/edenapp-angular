@@ -1,0 +1,1002 @@
+<section class="Service py-5 px-4" id="Propertydetails">
+    <div class="container-fluid">
+        <div class="row mx-0">
+            <div class="Service-container">
+                <div class="row mx-0">
+                    <div class="col-sm-8 pt-2">
+                        <div class="card border-0 shadow-sm p-5 Service-left">
+                            <div class="page-section">
+                                <h2 class="text-center">Book Your Eden Pro For Landscaping!</h2>
+                                <div class="text-center py-3">
+                                    <a class="btn btn-link" data-toggle="modal" data-target="#exampleModal">Looking to
+                                        order a different service? Click here</a>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6 offset-sm-3">
+                                        <label class="font-weight-bold w-100 text-center">Budget Amount</label>
+                                        <div class="position-relative">
+                                            <!-- <span class="doller-icon position-absolute">$</span>    -->
+                                            <!-- <input type="text" class="form-control py-4 pl-5" placeholder="Enter Your Budget Amount"> -->
+                                            <select class="form-control">
+                                                <option value="100">Less than $100</option>
+                                                <option value="300">$200 To $300</option>
+                                                <option value="400">$300 To $400</option>
+                                                <option value="400+">Above $400</option>
+                                            </select>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="Servicedetails" class="page-section">
+
+
+                                <h5 class="text-center font-weight-bold my-4">Select the Landscaping Services from Below
+                                    for an On-site Quote</h5>
+                                <hr class="m-auto">
+                                <div class="row yard-services shadow-sm mt-4">
+                                    <div class="col-sm-4 py-3 border-right">
+                                        <div class="card border-0">
+                                            <img src="../../../assets/images/LawnImprovements.jpg" class="img-fluid">
+                                            <h5 class="font-weight-bold text-dark text-center mt-2">Lawn<br>
+                                                Improvements</h5>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-8 border-left">
+                                        <div class="row mt-3">
+                                            <div class="col-sm-6" *ngFor="let item of lawnImrovements">
+                                                <div class="card border-0">
+                                                    <div class="form-group mb-2">
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input"
+                                                                id="{{item}}" (change)="getlawnImprovementItems(item)">
+                                                            <label class="custom-control-label "
+                                                                for="{{item}}">{{item | addSpace}}</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12 serices-info" *ngIf="landImprovementCheckedVal">
+                                                <div id="LawnImprovements" class="myaccordion">
+                                                    <div class="card" id="item"
+                                                        *ngFor="let item of landImprovementCheckedVal let i = index">
+                                                        <div class="card-header" id="'collapseOne'+i">
+                                                            <h2 class="mb-0">
+                                                                <a class="d-flex align-items-center justify-content-between btn accordion-toggle"
+                                                                    data-toggle="collapse" [href]="'#'+item+i"
+                                                                    aria-expanded="false"
+                                                                    aria-controls="'collapseOne'+i">
+                                                                    {{item | addSpace}}
+                                                                </a>
+                                                            </h2>
+                                                        </div>
+                                                        <div [id]="item+i" class="collapse" aria-labelledby="headingOne"
+                                                            data-parent="#LawnImprovements">
+                                                            <div class="card-body px-0">
+                                                                <div class="row">
+                                                                    <div class="col-sm-8 pr-0">
+                                                                        <input type="text" class="form-control"
+                                                                            placeholder="Describe Your Requirements (Optional)">
+                                                                    </div>
+                                                                    <div class="col-sm-4">
+                                                                        <div class="file-div btn btn-success btn-block">
+                                                                            Upload Photo
+                                                                            <input type="file" name="file" class="file"
+                                                                                (change)="uploadImage($event,item)" />
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-sm-12 pt-3" *ngIf="imgURL[item]">
+                                                                        <div class="upload-img show-image"
+                                                                            *ngFor="let img of imgURL[item] let i=index">
+                                                                            <img [src]="img"
+                                                                                class="img-fluid service-image">
+                                                                            <div class="delete"><a
+                                                                                    (click)="removeImage(item,i)"><i
+                                                                                        class="fa fa-times delete-icon"
+                                                                                        aria-hidden="true"></i></a>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                                <div class="row yard-services shadow-sm mt-4">
+                                    <div class="col-sm-4 py-3 border-right">
+                                        <div class="card border-0">
+                                            <img src="../../../assets/images/Hardscaping.jpg" class="img-fluid">
+                                            <h5 class="font-weight-bold text-dark text-center mt-2">Hardscaping</h5>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-8 border-left">
+                                        <div class="row mt-3">
+                                            <div class="col-sm-6" *ngFor="let item of hardScaping let i=index">
+                                                <div class="card border-0">
+                                                    <div class="form-group mb-2">
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input"
+                                                                id="hard{{item}}" (change)="gethardScapingItems(item)">
+                                                            <label class="custom-control-label "
+                                                                for="hard{{item}}">{{item | addSpace}}</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-12 serices-info" *ngIf="hardScapingCheckedVal">
+                                                <div id="hardscaping" class="myaccordion">
+                                                    <div class="card"
+                                                        *ngFor="let item of hardScapingCheckedVal let i=index">
+                                                        <div class="card-header" id="'hard'+item+i">
+                                                            <h2 class="mb-0">
+                                                                <a class="d-flex align-items-center justify-content-between btn collapsed accordion-toggle"
+                                                                    data-toggle="collapse" [href]="'#hard'+item+i"
+                                                                    aria-expanded="false" aria-controls="collapseOne">
+                                                                    {{item | addSpace}}
+                                                                </a>
+                                                            </h2>
+                                                        </div>
+                                                        <div [id]="'hard'+item+i" class="collapse"
+                                                            aria-labelledby="headingOne" data-parent="#hardscaping">
+                                                            <div class="card-body px-0">
+                                                                <div class="row">
+                                                                    <div class="col-sm-8 pr-0">
+                                                                        <input type="text" class="form-control"
+                                                                            placeholder="Describe Your Requirements (Optional)">
+                                                                    </div>
+                                                                    <div class="col-sm-4">
+                                                                        <div class="file-div btn btn-success btn-block">
+                                                                            Upload Photo
+                                                                            <input type="file" name="file"
+                                                                                class="file" />
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-sm-12 pt-3">
+                                                                        <div class="upload-img">
+                                                                            <img src="../../../assets/images/placeholder.jpg"
+                                                                                class="img-fluid">
+                                                                        </div>
+                                                                        <div class="upload-img">
+                                                                            <img src="../../../assets/images/placeholder.jpg"
+                                                                                class="img-fluid">
+                                                                        </div>
+                                                                        <div class="upload-img">
+                                                                            <img src="../../../assets/images/placeholder.jpg"
+                                                                                class="img-fluid">
+                                                                        </div>
+                                                                        <div class="upload-img">
+                                                                            <img src="../../../assets/images/placeholder.jpg"
+                                                                                class="img-fluid">
+                                                                        </div>
+                                                                        <div class="upload-img">
+                                                                            <img src="../../../assets/images/placeholder.jpg"
+                                                                                class="img-fluid">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                                <div class="row yard-services shadow-sm mt-4">
+                                    <div class="col-sm-4 py-3 border-right">
+                                        <div class="card border-0">
+                                            <img src="../../../assets/images/LandscapeServices.jpg" class="img-fluid">
+                                            <h5 class="font-weight-bold text-dark text-center mt-2">
+                                                Landscape<br>Services</h5>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-8 border-left">
+                                        <div class="row">
+                                            <div class="col-sm-6 py-3">
+                                                <div class="card border-0">
+                                                    <div class="form-group mb-2">
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input"
+                                                                id="arborist">
+                                                            <label class="custom-control-label " for="arborist">Arborist
+                                                                (Tree work)</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group mb-2">
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input"
+                                                                id="mulching">
+                                                            <label class="custom-control-label"
+                                                                for="mulching">Mulching</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group mb-0">
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input"
+                                                                id="seasonal">
+                                                            <label class="custom-control-label" for="seasonal">Seasonal
+                                                                Planters</label>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6 py-3">
+                                                <div class="card border-0">
+
+                                                    <div class="form-group mb-2">
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input"
+                                                                id="soil">
+                                                            <label class="custom-control-label" for="soil">Soil (Triple
+                                                                Mix, Manure, Top Soil)</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group mb-2">
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input"
+                                                                id="sprinkler">
+                                                            <label class="custom-control-label"
+                                                                for="sprinkler">Sprinkler / Irrigration Systems</label>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group mb-0">
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input"
+                                                                id="other02">
+                                                            <label class="custom-control-label"
+                                                                for="other02">Other</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12 serices-info">
+                                                <div id="landscapeservices" class="myaccordion">
+                                                    <div class="card">
+                                                        <div class="card-header" id="landscapeservicesheaderOne">
+                                                            <h2 class="mb-0">
+                                                                <button
+                                                                    class="d-flex align-items-center justify-content-between btn collapsed"
+                                                                    data-toggle="collapse"
+                                                                    data-target="#landscapeservicesOne"
+                                                                    aria-expanded="false" aria-controls="collapseOne">
+                                                                    Arborist (Tree work)
+                                                                    <span class="fa-stack fa-sm">
+                                                                        <i class="fas fa-circle fa-stack-2x"></i>
+                                                                        <i
+                                                                            class="fas fa-plus fa-stack-1x fa-inverse"></i>
+                                                                    </span>
+                                                                </button>
+                                                            </h2>
+                                                        </div>
+                                                        <div id="landscapeservicesOne" class="collapse"
+                                                            aria-labelledby="landscapeservicesheaderOne"
+                                                            data-parent="#landscapeservices">
+                                                            <div class="card-body px-0">
+                                                                <div class="row">
+                                                                    <div class="col-sm-8 pr-0">
+                                                                        <input type="text" class="form-control"
+                                                                            placeholder="Describe Your Requirements (Optional)">
+                                                                    </div>
+                                                                    <div class="col-sm-4">
+                                                                        <div class="file-div btn btn-success btn-block">
+                                                                            Upload Photo
+                                                                            <input type="file" name="file"
+                                                                                class="file" />
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-sm-12 pt-3">
+                                                                        <div class="upload-img">
+                                                                            <img src="../../../assets/images/placeholder.jpg"
+                                                                                class="img-fluid">
+                                                                        </div>
+                                                                        <div class="upload-img">
+                                                                            <img src="../../../assets/images/placeholder.jpg"
+                                                                                class="img-fluid">
+                                                                        </div>
+                                                                        <div class="upload-img">
+                                                                            <img src="../../../assets/images/placeholder.jpg"
+                                                                                class="img-fluid">
+                                                                        </div>
+                                                                        <div class="upload-img">
+                                                                            <img src="../../../assets/images/placeholder.jpg"
+                                                                                class="img-fluid">
+                                                                        </div>
+                                                                        <div class="upload-img">
+                                                                            <img src="../../../assets/images/placeholder.jpg"
+                                                                                class="img-fluid">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                                <div class="row yard-services shadow-sm mt-4">
+                                    <div class="col-sm-4 py-3 border-right">
+                                        <div class="card border-0">
+                                            <img src="../../../assets/images/LandscapingFeatures.jpg" class="img-fluid">
+                                            <h5 class="font-weight-bold text-dark text-center mt-2">Landscaping
+                                                <br>Features</h5>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-8 border-left">
+                                        <div class="row">
+                                            <div class="col-sm-6 py-3">
+                                                <div class="card border-0">
+                                                    <div class="form-group mb-2">
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input"
+                                                                id="decks">
+                                                            <label class="custom-control-label "
+                                                                for="decks">Decks</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group mb-2">
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input"
+                                                                id="design">
+                                                            <label class="custom-control-label" for="design">Design
+                                                                (Sketch, 3D, Auto Card)</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group mb-2">
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input"
+                                                                id="fences">
+                                                            <label class="custom-control-label"
+                                                                for="fences">Fences</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group mb-2">
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input"
+                                                                id="FireFeatures">
+                                                            <label class="custom-control-label" for="FireFeatures">Fire
+                                                                Features</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group mb-2">
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input"
+                                                                id="HotTubs">
+                                                            <label class="custom-control-label" for="HotTubs">Hot
+                                                                Tubs</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6 py-3">
+                                                <div class="card border-0">
+
+                                                    <div class="form-group mb-2">
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input"
+                                                                id="lighting">
+                                                            <label class="custom-control-label"
+                                                                for="lighting">Lighting</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group mb-2">
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input"
+                                                                id="pergolas">
+                                                            <label class="custom-control-label"
+                                                                for="pergolas">Pergolas</label>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group mb-2">
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input"
+                                                                id="Ponds">
+                                                            <label class="custom-control-label"
+                                                                for="Ponds">Ponds</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group mb-2">
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input"
+                                                                id="WaterFeatures">
+                                                            <label class="custom-control-label"
+                                                                for="WaterFeatures">Water Features</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group mb-0">
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input"
+                                                                id="other03">
+                                                            <label class="custom-control-label"
+                                                                for="other03">Other</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12 serices-info">
+                                                <div id="LandscapingFeatures" class="myaccordion">
+                                                    <div class="card">
+                                                        <div class="card-header" id="LandscapingFeaturesheaderOne">
+                                                            <h2 class="mb-0">
+                                                                <button
+                                                                    class="d-flex align-items-center justify-content-between btn collapsed"
+                                                                    data-toggle="collapse"
+                                                                    data-target="#LandscapingFeaturesOne"
+                                                                    aria-expanded="false" aria-controls="collapseOne">
+                                                                    Decks
+                                                                    <span class="fa-stack fa-sm">
+                                                                        <i class="fas fa-circle fa-stack-2x"></i>
+                                                                        <i
+                                                                            class="fas fa-plus fa-stack-1x fa-inverse"></i>
+                                                                    </span>
+                                                                </button>
+                                                            </h2>
+                                                        </div>
+                                                        <div id="LandscapingFeaturesOne" class="collapse"
+                                                            aria-labelledby="LandscapingFeaturesheaderOne"
+                                                            data-parent="#LandscapingFeatures">
+                                                            <div class="card-body px-0">
+                                                                <div class="row">
+                                                                    <div class="col-sm-8 pr-0">
+                                                                        <input type="text" class="form-control"
+                                                                            placeholder="Describe Your Requirements (Optional)">
+                                                                    </div>
+                                                                    <div class="col-sm-4">
+                                                                        <div class="file-div btn btn-success btn-block">
+                                                                            Upload Photo
+                                                                            <input type="file" name="file"
+                                                                                class="file" />
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-sm-12 pt-3">
+                                                                        <div class="upload-img">
+                                                                            <img src="../../../assets/images/placeholder.jpg"
+                                                                                class="img-fluid">
+                                                                        </div>
+                                                                        <div class="upload-img">
+                                                                            <img src="../../../assets/images/placeholder.jpg"
+                                                                                class="img-fluid">
+                                                                        </div>
+                                                                        <div class="upload-img">
+                                                                            <img src="../../../assets/images/placeholder.jpg"
+                                                                                class="img-fluid">
+                                                                        </div>
+                                                                        <div class="upload-img">
+                                                                            <img src="../../../assets/images/placeholder.jpg"
+                                                                                class="img-fluid">
+                                                                        </div>
+                                                                        <div class="upload-img">
+                                                                            <img src="../../../assets/images/placeholder.jpg"
+                                                                                class="img-fluid">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                                <div class="row yard-services shadow-sm mt-4">
+                                    <div class="col-sm-4 py-3 border-right">
+                                        <div class="card border-0">
+                                            <img src="../../../assets/images/RelatedServices.jpg" class="img-fluid">
+                                            <h5 class="font-weight-bold text-dark text-center mt-2">Related <br>Services
+                                            </h5>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-8 border-left">
+                                        <div class="row">
+                                            <div class="col-sm-6 py-3">
+                                                <div class="card border-0">
+                                                    <div class="form-group mb-2">
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input"
+                                                                id="JunkRemoval">
+                                                            <label class="custom-control-label " for="JunkRemoval">Junk
+                                                                Removal</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group mb-2">
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input"
+                                                                id="PowerWashing">
+                                                            <label class="custom-control-label" for="PowerWashing">Power
+                                                                Washing</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group mb-0">
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input"
+                                                                id="other04">
+                                                            <label class="custom-control-label"
+                                                                for="other04">Other</label>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-12 serices-info">
+                                                <div id="RelatedServices" class="myaccordion">
+                                                    <div class="card">
+                                                        <div class="card-header" id="RelatedServicesheaderOne">
+                                                            <h2 class="mb-0">
+                                                                <button
+                                                                    class="d-flex align-items-center justify-content-between btn collapsed"
+                                                                    data-toggle="collapse"
+                                                                    data-target="#RelatedServicesOne"
+                                                                    aria-expanded="false" aria-controls="collapseOne">
+                                                                    Junk Removal
+                                                                    <span class="fa-stack fa-sm">
+                                                                        <i class="fas fa-circle fa-stack-2x"></i>
+                                                                        <i
+                                                                            class="fas fa-plus fa-stack-1x fa-inverse"></i>
+                                                                    </span>
+                                                                </button>
+                                                            </h2>
+                                                        </div>
+                                                        <div id="RelatedServicesOne" class="collapse"
+                                                            aria-labelledby="RelatedServicesheaderOne"
+                                                            data-parent="#RelatedServices">
+                                                            <div class="card-body px-0">
+                                                                <div class="row">
+                                                                    <div class="col-sm-8 pr-0">
+                                                                        <input type="text" class="form-control"
+                                                                            placeholder="Describe Your Requirements (Optional)">
+                                                                    </div>
+                                                                    <div class="col-sm-4">
+                                                                        <div class="file-div btn btn-success btn-block">
+                                                                            Upload Photo
+                                                                            <input type="file" name="file"
+                                                                                class="file" />
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-sm-12 pt-3">
+                                                                        <div class="upload-img">
+                                                                            <img src="../../../assets/images/placeholder.jpg"
+                                                                                class="img-fluid">
+                                                                        </div>
+                                                                        <div class="upload-img">
+                                                                            <img src="../../../assets/images/placeholder.jpg"
+                                                                                class="img-fluid">
+                                                                        </div>
+                                                                        <div class="upload-img">
+                                                                            <img src="../../../assets/images/placeholder.jpg"
+                                                                                class="img-fluid">
+                                                                        </div>
+                                                                        <div class="upload-img">
+                                                                            <img src="../../../assets/images/placeholder.jpg"
+                                                                                class="img-fluid">
+                                                                        </div>
+                                                                        <div class="upload-img">
+                                                                            <img src="../../../assets/images/placeholder.jpg"
+                                                                                class="img-fluid">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                                <div class="row mt-4">
+                                    <div class="col-sm-12">
+
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="customCheckBox1">
+                                            <label class="custom-control-label font-weight-bold"
+                                                for="customCheckBox1">Additional services your would like to add <img
+                                                    src="../../../assets/images/info.svg"></label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div id="Contactinformation" class="page-section">
+                                <h2 class="text-center my-4">Contact Information</h2>
+                                <hr class="m-auto">
+                                <div class="row mt-4">
+                                    <div class="col-sm-12">
+                                        <label class="font-weight-bold">Email</label>
+                                        <div class="position-relativ">
+                                            <input type="text" class="form-control p-4" placeholder="name@email.com">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mt-4">
+                                    <div class="col-sm-6">
+                                        <label class="font-weight-bold">First Name</label>
+                                        <div class="position-relativ">
+                                            <input type="text" class="form-control p-4" placeholder="First Name">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label class="font-weight-bold">Last Name</label>
+                                        <div class="position-relativ">
+                                            <input type="text" class="form-control p-4" placeholder="Last Name">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mt-4">
+                                    <div class="col-sm-12">
+                                        <label class="font-weight-bold">Phone Number</label>
+                                        <div class="position-relativ">
+                                            <input type="text" class="form-control p-4" placeholder="000-000-0000">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row mt-4">
+                                <div class="col-sm-6 price-tab">
+                                    <div class="p-4 rounded"
+                                        style="background-color: rgb(253, 248, 236); border:1px solid rgb(255, 210, 96);">
+                                        <p class="font-weight-bold">
+                                            <svg width=" 30 " height="28 " viewBox="0 0 30 28 " fill="none "
+                                                xmlns="http://www.w3.org/2000/svg ">
+                                                <path d="M15 0L18.5443 10.1216L29.2658 10.3647L20.7349 16.8634L23.8168 27.1353L15 21.03L6.18322 27.1353L9.26513 16.8634L0.734152
+                                    10.3647L11.4557 10.1216L15 0Z " fill="#FFD260 "></path>
+                                            </svg> Satisfaction guaranteed</p>
+                                        <p class=" text-center mb-0"> <small>If you’re not fully satisfied with your
+                                                service, we have a team ready to resolve any issues. </small></p>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 price-tab">
+                                    <div class="p-4 rounded"
+                                        style="background-color: rgb(253, 248, 236); border:1px solid rgb(255, 210, 96);">
+                                        <p class="font-weight-bold">
+                                            <svg width="30" height="30" viewBox="0 0 30 30" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path
+                                                    d="M5.19427 0C5.00843 0.0358516 4.86155 0.219767 4.86488 0.412088V8.49416C3.29999 9.63709 1.73163 10.8199 0.164752 11.9448C0.0620665 12.0218 -0.00112404 12.1505 1.51473e-05 12.2802V29.5879C4.75797e-05 29.8037 0.193162 30 0.40542 30H29.5946C29.8068 30 30 29.8037 30 29.5879V12.2802C30.0008 12.1507 29.9378 12.0223 29.8353 11.9454L29.81 11.9326C29.8019 11.9236 29.7934 11.9153 29.7846 11.9071L25.1351 8.49416V0.412088C25.1351 0.196319 24.942 4.12088e-05 24.7297 0C18.2197 0 11.6987 0 5.19427 0ZM5.67569 0.824176H24.3243V14.4952L15.0253 19.2342L5.67569 14.4952V0.824176ZM9.32433 3.46156V4.28571H22.2973V3.46156H9.32433ZM7.70271 6.0989V6.92308H22.2973V6.0989H7.70271ZM7.70271 8.57143V9.3956H22.2973V8.57143H7.70271ZM4.86488 9.52438V14.0831L1.19089 12.2159L4.86488 9.52438ZM25.1351 9.52438L28.8091 12.2159L25.1351 14.0831V9.52438ZM7.70271 11.044V11.8681H22.2973V11.044H7.70271Z"
+                                                    fill="#FFD260"></path>
+                                            </svg> We’re just an email away</p>
+                                        <p class=" text-center mb-0"> <small>Do you have a question for an eden pro?
+                                                Send us an email and we’ll get back to you.</small></p>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 text-center my-5">
+                                    <button type="submit" class="btn btn-success btn-book py-3 px-4">Book Your Eden
+                                        Pro</button>
+                                </div>
+
+                            </div>
+                            <p class="text-center text-secondary">
+                                <small>Payment due at job completion. You will receive an email with your job details
+                                    once the job is <br>complete. You are subscribing to a recurring Eden service. By
+                                    proceeding, you are agreeing to Eden’s<br> Terms & Conditions and Privacy
+                                    Policy.</small>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 pt-2 px-4">
+                        <div class="Service-right">
+                            <div class="card border-0 shadow-sm " style="width:100%;">
+                                <div class="card-header px-3 bg-white border-0">
+                                    <div class="row">
+                                        <div class="col-8">
+                                            <p class="font-weight-bold mb-0">St, Mankato, Minnesota 56001, United States
+                                            </p>
+                                        </div>
+                                        <div class="col-4">
+                                            <button class="btn btn-success btn-block font-weight-bold">Change</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="position-relative px-1">
+                                    <img src="https://api.mapbox.com/styles/v1/mapbox/streets-v11/static/-93.9598349214382,44.1798067363755,15,0,60/340x220?access_token=pk.eyJ1IjoiZWRlbmFwcCIsImEiOiJjanpib2NkZmIwMWZvM2NtbGoybTYxNmVoIn0.nQ7skBomNuIOODgzDIKSHA"
+                                        alt="St, Mankato, Minnesota 56001, United States" class="img-fluid rounded"
+                                        style="width: 100%; height: 220px;">
+                                    <div class="position-absolute"
+                                        style="transform: translate(-50%, -50%); top: 50%; left: 50%;"><svg width="59"
+                                            height="69" viewBox="0 0 59 69" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <g filter="url(#filter0_d)">
+                                                <g filter="url(#filter1_i)">
+                                                    <path
+                                                        d="M29.9353 57.3066L29.3391 57.8872L28.7429 57.3066C23.6753 53.8231 7.28027 41.3403 7.28027 25.0836C7.28027 13.1814 17.1173 3.60153 29.3391 3.60153C41.5609 3.60153 51.3979 13.1814 51.3979 25.0836C51.3979 41.3403 35.0028 53.8231 29.9353 57.3066Z"
+                                                        fill="url(#paint0_linear)"></path>
+                                                </g>
+                                                <path
+                                                    d="M30.0124 17.2444C32.0588 17.2444 33.6959 17.7328 34.9238 18.7095C36.1516 19.6862 36.7656 21.0537 36.7656 22.7142C36.7656 23.8862 36.4586 24.863 35.947 25.7421C35.4354 26.6211 34.8215 27.3049 34.0029 27.7932C33.1843 28.2816 32.2634 28.6723 31.2402 29.063C29.3985 29.5514 27.352 29.8444 24.9986 29.8444C25.101 31.2118 25.5103 32.3839 26.3288 33.263C27.1474 34.1421 28.3752 34.5328 30.1147 34.5328C31.8542 34.5328 33.4913 33.9467 35.2308 32.7746L36.7656 35.9979C36.254 36.4862 35.3331 36.9746 34.0029 37.463C32.6727 37.9514 31.2402 38.2444 29.5008 38.2444C26.1242 38.2444 23.6685 37.3653 22.1337 35.6072C20.5988 33.7514 19.7803 31.3095 19.7803 28.1839C19.7803 25.0583 20.7012 22.5188 22.4406 20.37C24.2824 18.3188 26.7381 17.2444 30.0124 17.2444ZM28.0683 26.2304C29.0915 26.0351 30.0124 25.6444 30.8309 25.0583C31.6495 24.4723 32.1611 23.7886 32.1611 22.9095C32.1611 21.3467 31.3426 20.4676 29.7054 20.4676C28.1706 20.4676 26.9427 21.0537 26.1242 22.2258C25.3056 23.3979 24.8963 24.9607 24.794 26.5235C26.0219 26.5235 27.1474 26.4258 28.0683 26.2304Z"
+                                                    fill="white"></path>
+                                                <mask id="path-3-inside-1" fill="white">
+                                                    <path
+                                                        d="M54.3391 25.1127C54.3391 11.5118 43.0019 0.744385 29.3391 0.744385C15.6763 0.744385 4.33911 11.7952 4.33911 25.1127C4.33911 45.7975 27.5949 59.9652 28.467 60.5319C29.0484 60.8152 29.9205 60.8152 30.5019 60.5319C31.374 59.9652 54.3391 45.7975 54.3391 25.1127ZM29.9205 56.5649L29.3391 57.1316L28.7577 56.5649C23.8159 53.1647 7.82748 40.9805 7.82748 25.1127C7.82748 13.4953 17.4205 4.14462 29.3391 4.14462C41.2577 4.14462 50.8507 13.4953 50.8507 25.1127C50.8507 40.9805 34.8624 53.1647 29.9205 56.5649Z">
+                                                    </path>
+                                                </mask>
+                                                <path
+                                                    d="M54.3391 25.1127C54.3391 11.5118 43.0019 0.744385 29.3391 0.744385C15.6763 0.744385 4.33911 11.7952 4.33911 25.1127C4.33911 45.7975 27.5949 59.9652 28.467 60.5319C29.0484 60.8152 29.9205 60.8152 30.5019 60.5319C31.374 59.9652 54.3391 45.7975 54.3391 25.1127ZM29.9205 56.5649L29.3391 57.1316L28.7577 56.5649C23.8159 53.1647 7.82748 40.9805 7.82748 25.1127C7.82748 13.4953 17.4205 4.14462 29.3391 4.14462C41.2577 4.14462 50.8507 13.4953 50.8507 25.1127C50.8507 40.9805 34.8624 53.1647 29.9205 56.5649Z"
+                                                    fill="white"></path>
+                                                <path
+                                                    d="M28.467 60.5319L17.5693 77.3021L18.6 77.9718L19.7049 78.5103L28.467 60.5319ZM30.5019 60.5319L39.264 78.5103L40.3689 77.9718L41.3996 77.3021L30.5019 60.5319ZM29.9205 56.5649L18.5838 40.0883L17.1804 41.0539L15.9605 42.243L29.9205 56.5649ZM29.3391 57.1316L15.3791 71.4536L29.3391 85.0609L43.2992 71.4536L29.3391 57.1316ZM28.7577 56.5649L42.7178 42.243L41.4979 41.0539L40.0944 40.0883L28.7577 56.5649ZM74.3391 25.1127C74.3391 -0.162408 53.4084 -19.2556 29.3391 -19.2556V20.7444C32.5954 20.7444 34.3391 23.186 34.3391 25.1127H74.3391ZM29.3391 -19.2556C5.11618 -19.2556 -15.6609 0.270077 -15.6609 25.1127H24.3391C24.3391 24.2565 24.692 23.2151 25.6756 22.2564C26.6637 21.2932 27.9708 20.7444 29.3391 20.7444V-19.2556ZM-15.6609 25.1127C-15.6609 43.0171 -5.74235 56.483 1.61633 64.1839C5.51826 68.2672 9.38372 71.4533 12.3115 73.6542C13.7922 74.7672 15.0718 75.6572 16.0466 76.3104C16.865 76.8588 17.9461 77.5469 17.5693 77.3021L39.3647 43.7616C38.9367 43.4835 34.6877 40.8943 30.5357 36.5493C26.0485 31.8534 24.3391 27.8932 24.3391 25.1127H-15.6609ZM19.7049 78.5103C23.2923 80.2587 26.7862 80.7444 29.4845 80.7444C32.1827 80.7444 35.6766 80.2587 39.264 78.5103L21.7398 42.5534C24.7458 41.0884 27.513 40.7444 29.4845 40.7444C31.456 40.7444 34.2231 41.0884 37.2291 42.5534L19.7049 78.5103ZM41.3996 77.3021C41.2198 77.4189 42.074 76.877 42.9952 76.2529C43.9657 75.5953 45.2357 74.7015 46.7033 73.5851C49.6059 71.377 53.4321 68.1841 57.2921 64.0945C64.5887 56.3638 74.3391 42.9251 74.3391 25.1127H34.3391C34.3391 27.9852 32.607 31.9727 28.2029 36.6387C24.1156 40.9692 19.9098 43.563 19.6042 43.7616L41.3996 77.3021ZM15.9605 42.243L15.3791 42.8097L43.2992 71.4536L43.8805 70.8868L15.9605 42.243ZM43.2992 42.8097L42.7178 42.243L14.7977 70.8868L15.3791 71.4536L43.2992 42.8097ZM40.0944 40.0883C38.3417 38.8824 34.7106 36.1453 31.7079 32.5962C28.5223 28.831 27.8275 26.2953 27.8275 25.1127H-12.1725C-12.1725 39.798 -4.87317 51.2882 1.1709 58.4321C7.39788 65.7921 14.2318 70.8473 17.421 73.0415L40.0944 40.0883ZM27.8275 25.1127C27.8275 24.9877 27.8484 24.923 27.8697 24.8737C27.8973 24.81 27.9565 24.7085 28.0739 24.594C28.3002 24.3734 28.6969 24.1446 29.3391 24.1446V-15.8554C6.86037 -15.8554 -12.1725 1.97019 -12.1725 25.1127H27.8275ZM29.3391 24.1446C29.9813 24.1446 30.378 24.3734 30.6043 24.594C30.7217 24.7085 30.781 24.81 30.8085 24.8737C30.8298 24.923 30.8507 24.9877 30.8507 25.1127H70.8507C70.8507 1.97019 51.8179 -15.8554 29.3391 -15.8554V24.1446ZM30.8507 25.1127C30.8507 26.2953 30.1559 28.831 26.9703 32.5962C23.9676 36.1453 20.3365 38.8824 18.5838 40.0883L41.2572 73.0415C44.4464 70.8473 51.2803 65.7921 57.5073 58.4321C63.5514 51.2882 70.8507 39.798 70.8507 25.1127H30.8507Z"
+                                                    fill="white" mask="url(#path-3-inside-1)"></path>
+                                            </g>
+                                            <defs>
+                                                <filter id="filter0_d" x="0.339111" y="0.744385" width="58" height="68"
+                                                    filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                                                    <feFlood flood-opacity="0" result="BackgroundImageFix"></feFlood>
+                                                    <feColorMatrix in="SourceAlpha" type="matrix"
+                                                        values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0">
+                                                    </feColorMatrix>
+                                                    <feOffset dy="4"></feOffset>
+                                                    <feGaussianBlur stdDeviation="2"></feGaussianBlur>
+                                                    <feColorMatrix type="matrix"
+                                                        values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0">
+                                                    </feColorMatrix>
+                                                    <feBlend mode="normal" in2="BackgroundImageFix"
+                                                        result="effect1_dropShadow"></feBlend>
+                                                    <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow"
+                                                        result="shape"></feBlend>
+                                                </filter>
+                                                <filter id="filter1_i" x="7.28027" y="-0.398468" width="44.1176"
+                                                    height="58.2857" filterUnits="userSpaceOnUse"
+                                                    color-interpolation-filters="sRGB">
+                                                    <feFlood flood-opacity="0" result="BackgroundImageFix"></feFlood>
+                                                    <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix"
+                                                        result="shape"></feBlend>
+                                                    <feColorMatrix in="SourceAlpha" type="matrix"
+                                                        values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+                                                        result="hardAlpha"></feColorMatrix>
+                                                    <feOffset dy="-4"></feOffset>
+                                                    <feGaussianBlur stdDeviation="2"></feGaussianBlur>
+                                                    <feComposite in2="hardAlpha" operator="arithmetic" k2="-1" k3="1">
+                                                    </feComposite>
+                                                    <feColorMatrix type="matrix"
+                                                        values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.11 0">
+                                                    </feColorMatrix>
+                                                    <feBlend mode="normal" in2="shape" result="effect1_innerShadow">
+                                                    </feBlend>
+                                                </filter>
+                                                <linearGradient id="paint0_linear" x1="29.3391" y1="3.60153"
+                                                    x2="29.3391" y2="57.8872" gradientUnits="userSpaceOnUse">
+                                                    <stop stop-color="#0BA360"></stop>
+                                                    <stop offset="1" stop-color="#3CBA92"></stop>
+                                                </linearGradient>
+                                            </defs>
+                                        </svg></div>
+                                </div>
+                                <div class="card-body map-link">
+
+
+                                    <nav class="navigation" id="mainNav">
+                                        <a class="navigation__link active"
+                                            href="{{currentRoute}}#Propertydetails">Property details</a>
+                                        <a class="navigation__link" href="{{currentRoute}}#Servicedetails">Service
+                                            details</a>
+                                        <a class="navigation__link" href="{{currentRoute}}#Contactinformation">Contact
+                                            information</a>
+
+
+                                    </nav>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header text-center">
+                <h5 class="modal-title font-weight-bold ml-auto" id="exampleModalLabel">Type of Work</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" #closebutton>
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body pb-5" style="background-color: #fafafa;">
+                <div class="grid-wrapper row mx-0">
+
+                    <div class="col-sm-6 px-1 pb-3" (click)="changeService('grass-cut')">
+                        <label>
+                            <input type="radio" name="product" class="card-input-element" />
+
+                            <div class="card card-input" style="height:100%;">
+                                <div class="card-body text-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 41 29"
+                                        class="w-24 mt-2 mb-4 text-brand-lightgreen mx-auto fill-current">
+                                        <path
+                                            d="M.072 25.154l2.096-5.123a.911.911 0 0 1 .277-.365.943.943 0 0 1 .423-.19l5.492-.956v1.14a.99.99 0 0 0 .382.794 1.049 1.049 0 0 0 .874.205l9.933-2.062c.232-.048.44-.172.59-.352a.997.997 0 0 0 .233-.635v-1.229l3.426-.606a.935.935 0 0 0 .578-.346L36.077.363A.951.951 0 0 1 36.83 0l3.238.021c.247 0 .484.096.659.267.175.17.273.402.273.643a.898.898 0 0 1-.273.643.944.944 0 0 1-.66.266H37.88a.951.951 0 0 0-.757.371l-11.01 14.541a.895.895 0 0 0-.18.487l-.494 8.47a.9.9 0 0 1-.294.609.945.945 0 0 1-.642.245h-1.536a3.162 3.162 0 0 0-.944-2.271 3.323 3.323 0 0 0-2.314-.954 3.326 3.326 0 0 0-2.328.92 3.164 3.164 0 0 0-.978 2.258l-7.737-.055a3.134 3.134 0 0 0-.24-1.228 3.197 3.197 0 0 0-.704-1.043 3.286 3.286 0 0 0-1.06-.702 3.35 3.35 0 0 0-3.581.668 3.2 3.2 0 0 0-.72 1.034 3.135 3.135 0 0 0-.259 1.224H.903a.95.95 0 0 1-.43-.118.923.923 0 0 1-.325-.299.895.895 0 0 1-.076-.843z">
+                                        </path>
+                                        <path
+                                            d="M19.671 28.611c-1.174-.008-2.12-.944-2.111-2.09.008-1.145.967-2.068 2.142-2.06 1.174.009 2.12.945 2.11 2.09-.008 1.146-.966 2.069-2.141 2.06zM5.389 28.512c-1.175-.009-2.12-.944-2.112-2.09.009-1.146.968-2.068 2.142-2.06 1.175.008 2.12.944 2.112 2.09-.009 1.146-.968 2.068-2.142 2.06zM9.528 14.605a.563.563 0 0 1 .38-.145l8.989.064a.576.576 0 0 1 .392.166.548.548 0 0 1 .164.385v2.164a.538.538 0 0 1-.125.34.562.562 0 0 1-.313.19l-9.001 1.857a.575.575 0 0 1-.492-.1.548.548 0 0 1-.213-.442v-.735l.026-3.347a.53.53 0 0 1 .193-.397zM16.485 11.088l.755.45-1.183 1.89-.755-.449 1.183-1.891zM15.556 8.417l.865.178-.457 2.118-.865-.178.457-2.118zM13.476 6.93l.985 1.867-.786.394-.985-1.867.786-.395zM12.967 9.898l1.707 1.86-.658.576-1.707-1.861.658-.575zM10.48 11.658l2.379 1.106-.38.778-2.378-1.105.38-.779zM19.87 7.844l.404.767-2.393 1.2-.404-.766 2.393-1.2zM17.596 5.436l.021 1.878-.884.01-.021-1.878.884-.01z">
+                                        </path>
+                                    </svg>
+                                    <h4 class="Typography__Heading4-t8507c-3 cpGsUy mx-auto">Grass Cutting</h4>
+                                    <div class="Typography__BodyCopy-t8507c-7 evQnBr">Recurring or one-time grass
+                                        cutting &amp; more</div>
+                                </div>
+                            </div>
+
+                        </label>
+                    </div>
+
+                    <div class="col-sm-6 px-1 pb-3">
+                        <label>
+                            <input type="radio" name="product" class="card-input-element"
+                                (click)="changeService('snow-removal')" />
+
+                            <div class="card card-input" style="height:100%;">
+                                <div class="card-body text-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 35 35"
+                                        class="w-20 mt-2 mb-4 text-brand-teal mx-auto fill-current">
+                                        <path
+                                            d="M11.736 34.73a2.2 2.2 0 0 1-1.54-.622l-9.56-9.35a2.1 2.1 0 0 1 0-3.014l6.835-6.685a.738.738 0 0 1 1.026 0L20.109 26.42a.692.692 0 0 1 .213.501c0 .19-.077.37-.212.503l-6.833 6.684a2.195 2.195 0 0 1-1.54.622zM1.665 23.753l9.56 9.351a.738.738 0 0 0 1.025 0l6.32-6.183L7.984 16.565l-6.32 6.183a.701.701 0 0 0 0 1.005z">
+                                        </path>
+                                        <path
+                                            d="M13.791 21.95a.737.737 0 0 1-.513-.207.7.7 0 0 1 0-1.004l15.24-14.911a.738.738 0 0 1 1.027 0 .7.7 0 0 1 0 1.004l-15.241 14.91a.731.731 0 0 1-.513.208z">
+                                        </path>
+                                        <path
+                                            d="M31.209 7.991a3.66 3.66 0 0 1-2.566-1.038l-.248-.241a3.5 3.5 0 0 1 0-5.023l.85-.83a.738.738 0 0 1 1.026 0l4.355 4.26a.696.696 0 0 1-.002 1.003l-.85.831a3.653 3.653 0 0 1-2.565 1.038zm-1.451-5.628l-.337.328a2.103 2.103 0 0 0 0 3.014l.248.241c.85.832 2.23.831 3.08.002l.337-.328-3.328-3.257zM5.205 23.96a.738.738 0 0 1-.514-.207.7.7 0 0 1 0-1.005l2.78-2.719a.738.738 0 0 1 1.026 0 .7.7 0 0 1 0 1.004l-2.78 2.72a.732.732 0 0 1-.512.207zM11.737 30.35a.738.738 0 0 1-.514-.207.7.7 0 0 1 0-1.004l2.78-2.72a.738.738 0 0 1 1.026 0 .7.7 0 0 1 0 1.005l-2.78 2.72a.732.732 0 0 1-.512.206zM9.56 28.22a.737.737 0 0 1-.514-.207.7.7 0 0 1 0-1.004l2.78-2.72a.738.738 0 0 1 1.026 0 .7.7 0 0 1 0 1.005l-2.78 2.72a.731.731 0 0 1-.512.207zM7.382 26.09a.737.737 0 0 1-.513-.207.7.7 0 0 1 0-1.004l2.78-2.72a.738.738 0 0 1 1.025 0 .7.7 0 0 1 0 1.005l-2.78 2.72a.731.731 0 0 1-.512.207z">
+                                        </path>
+                                    </svg>
+                                    <h4 class="Typography__Heading4-t8507c-3 cpGsUy mx-auto">Snow Removal</h4>
+                                    <div class="Typography__BodyCopy-t8507c-7 evQnBr">Automated or one-time snow removal
+                                        &amp; more</div>
+                                </div>
+                            </div>
+                        </label>
+                    </div>
+
+                    <div class="col-sm-6 px-1 pb-3" (click)="changeService('yard-work')">
+                        <label>
+                            <input type="radio" name="product" class="card-input-element" />
+
+                            <div class="card card-input" style="height:100%;">
+                                <div class="card-body text-center">
+                                    <svg class="fill-current w-15 mt-2 mb-4 text-brand-orange mx-auto"
+                                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 58 71" fill="none">
+                                        <path
+                                            d="M5.31.088a18.259 18.259 0 0 0-3.845.028c-.35.04-.676.197-.92.445s-.392.571-.417.913C-.2 6 1.112 9.638 3.09 13.461c-.127.54-1.075 4.527-1.437 6.995C.982 25.012.403 29.657.419 34.358c.014 4.417.718 8.71 1.227 12.909.408 3.368 1.377 9.409 1.458 9.918C1.24 60.89-.516 64.75.14 69.321c.048.337.215.648.472.88.257.23.589.368.939.389 5.157.3 9.442-1.127 13.935-2.935h28.157c3.841 1.83 7.844 3.566 12.591 2.924.345-.047.663-.208.9-.455.238-.247.38-.566.405-.903.328-4.527-.984-8.162-2.962-11.985.127-.537 1.071-4.533 1.438-6.995.647-4.34 1.228-8.764 1.233-13.254.005-4.627-.703-9.138-1.227-13.552-.401-3.376-1.377-9.416-1.459-9.925 1.864-3.705 3.62-7.562 2.965-12.134a1.46 1.46 0 0 0-.472-.879 1.54 1.54 0 0 0-.94-.39c-5.16-.3-9.447 1.125-13.943 2.935H15.5C12.282 1.766 8.94.435 5.31.087zM3.306 3.175c3.78-.035 7.457 1.158 11.359 2.705.181.072.375.109.572.11H42.43c.2-.001.4-.04.584-.116 3.978-1.614 7.463-2.603 11.374-2.676.033 3.205-1.079 6.18-2.748 9.476-.138.272-.186.58-.136.88 0 0 1.103 6.859 1.502 10.218.533 4.483 1.212 8.883 1.207 13.213-.005 4.244-.56 8.533-1.2 12.836-.346 2.314-1.489 7.226-1.489 7.226-.08.338-.033.693.13 1.001 1.768 3.323 2.646 6.147 2.707 9.481-3.299.034-6.358-1.044-9.75-2.667-.208-.1-.439-.153-.672-.153H15.237c-.201 0-.4.04-.584.115-3.978 1.614-7.464 2.6-11.374 2.673-.033-3.204 1.079-6.181 2.748-9.475.137-.271.184-.577.136-.875 0 0-1.095-6.858-1.503-10.223-.517-4.275-1.193-8.46-1.206-12.575-.015-4.458.538-8.963 1.2-13.475.34-2.308 1.488-7.22 1.488-7.22.08-.338.034-.694-.13-1.004C4.246 9.33 3.368 6.507 3.306 3.175z">
+                                        </path>
+                                        <path
+                                            d="M15.174 35.356c-.402 0-.788.156-1.073.432-.284.276-.444.651-.444 1.042v11.786c0 .39.16.765.444 1.041.285.277.67.432 1.073.432H44.01c.402 0 .788-.155 1.073-.432.285-.276.445-.65.445-1.041V36.83c0-.391-.16-.766-.445-1.042a1.542 1.542 0 0 0-1.073-.432H15.174zm1.518 2.947h25.8v8.84h-25.8v-8.84z">
+                                        </path>
+                                        <path
+                                            d="M28.83 14.731c-2.018 0-3.401 1.52-4.06 3.352-1.898.219-3.652 1.092-4.15 2.887-.43 1.557.394 2.963 1.6 4.042-.7 1.517-.87 3.205.258 4.486 1.592 1.807 4.253 1.624 6.355.371 2.103 1.253 4.764 1.436 6.356-.37 1.128-1.282.958-2.97.258-4.487 1.205-1.08 2.03-2.485 1.6-4.043-.498-1.794-2.252-2.667-4.15-2.886-.66-1.832-2.042-3.349-4.06-3.352h-.006zm.004 2.947c.64 0 1.409.628 1.556 1.818.046.377.24.722.541.963.302.24.688.36 1.077.332 1.24-.088 1.977.476 2.108.947.118.434-.132 1.12-1.103 1.628a1.507 1.507 0 0 0-.5.422 1.431 1.431 0 0 0 .044 1.806c.717.854.664 1.609.326 1.993-.422.478-1.72.616-2.86-.27a3.296 3.296 0 0 1-.164-.136 1.543 1.543 0 0 0-1.026-.387c-.38 0-.745.138-1.025.387a3.343 3.343 0 0 1-.163.136c-1.14.886-2.44.748-2.86.27-.34-.384-.392-1.14.325-1.993a1.431 1.431 0 0 0 .044-1.806 1.506 1.506 0 0 0-.5-.422c-.973-.51-1.222-1.197-1.103-1.631.132-.47.87-1.032 2.108-.944.39.028.775-.091 1.076-.332.302-.241.496-.586.542-.963.147-1.19.915-1.816 1.556-1.818z">
+                                        </path>
+                                        <path
+                                            d="M30.351 22.835c0 .391-.16.766-.444 1.042-.285.276-.671.431-1.074.431-.402 0-.788-.155-1.073-.431a1.451 1.451 0 0 1-.444-1.042c0-.39.16-.765.444-1.041a1.54 1.54 0 0 1 1.073-.432c.403 0 .789.155 1.074.432.284.276.444.65.444 1.041z">
+                                        </path>
+                                    </svg>
+                                    <h4 class="Typography__Heading4-t8507c-3 cpGsUy mx-auto">Yard Work</h4>
+                                    <div class="Typography__BodyCopy-t8507c-7 evQnBr">Garden beds, Shrubs, Leaf cleanup
+                                        &amp; more</div>
+                                </div>
+                            </div>
+                        </label>
+                    </div>
+
+                    <div class="col-sm-6 px-1 pb-3">
+                        <label>
+                            <input type="radio" name="product" class="card-input-element" checked />
+
+                            <div class="card card-input" style="height:100%;">
+                                <div class="card-body text-center">
+                                    <svg width="50%" height="50%" viewBox="0 0 120 83" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M23.8711 0C32.5187 0 39.2351 15.2355 39.2351 28.1681C39.2351 39.84 33.4846 46.8431 23.8711 46.8431C14.2577 46.8431 8.36082 39.84 8.36082 28.1681C8.36082 15.2355 15.2235 0 23.8711 0Z"
+                                            fill="#A8D0AA"></path>
+                                        <path
+                                            d="M23.8711 46.8431V0C15.2235 0 8.36079 15.2355 8.36079 28.1681C8.36079 39.84 14.2576 46.8431 23.8711 46.8431Z"
+                                            fill="#3B8740"></path>
+                                        <path
+                                            d="M17.9451 32.1364L21.6762 36.1516V69.7823C21.6762 71.0427 22.6418 72.1167 23.871 72.1167C25.1003 72.1167 26.0659 71.0427 26.0659 69.7823V26.8141L29.797 22.7989C30.6749 21.9119 30.6749 20.4179 29.797 19.5308C28.9629 18.5972 27.5585 18.5972 26.7243 19.5308L26.0657 20.1844V16.4963C26.0657 15.1889 25.1002 14.1619 23.8709 14.1619C22.6416 14.1619 21.676 15.1889 21.676 16.4963V29.5219L21.0174 28.8683C20.1834 27.9347 18.779 27.9347 17.9448 28.8683C17.067 29.7554 17.067 31.2494 17.9451 32.1364Z"
+                                            fill="#946E48"></path>
+                                        <path
+                                            d="M17.9451 32.1364L21.6762 36.1516V69.7823C21.6762 71.0427 22.6418 72.1167 23.8711 72.1167V14.1619C22.6418 14.1619 21.6762 15.1889 21.6762 16.4963V29.5219L21.0176 28.8683C20.1836 27.9347 18.7792 27.9347 17.945 28.8683C17.067 29.7554 17.067 31.2494 17.9451 32.1364Z"
+                                            fill="#61433B"></path>
+                                        <path
+                                            d="M5.36412 59.3708V77.3457C5.36412 78.6527 6.32971 79.68 7.55898 79.68H31.8487L36.2384 78.4193L31.8487 77.3457C31.8487 70.9028 26.9322 65.6738 20.8744 65.6738H19.6452C16.8359 61.2851 12.8707 58.2816 8.21758 56.9742C6.76883 56.554 5.36412 57.8303 5.36412 59.3708Z"
+                                            fill="#3B8740"></path>
+                                        <path
+                                            d="M5.3642 77.3457C5.3642 78.6527 6.32979 79.68 7.55906 79.68H20.8745V65.6738H19.6452C16.836 61.2851 12.8708 58.2816 8.21766 56.9742C6.76891 56.554 5.3642 57.8303 5.3642 59.3708V77.3457Z"
+                                            fill="#1B411C"></path>
+                                        <path
+                                            d="M86.6439 0C91.4926 0 95.4233 4.33603 95.4233 9.49313C95.4233 14.6501 91.4926 18.8306 86.6439 18.8306C81.7952 18.8306 77.8645 14.6501 77.8645 9.49313C77.8645 4.33603 81.7952 0 86.6439 0Z"
+                                            fill="#FFE375"></path>
+                                        <path
+                                            d="M77.8646 9.49313C77.8646 4.33603 81.7953 0 86.644 0V18.8306C81.7953 18.8306 77.8646 14.6501 77.8646 9.49313Z"
+                                            fill="#FF9F3D"></path>
+                                        <path
+                                            d="M75.5233 56.1807H84.4491C85.6622 56.1807 86.6439 55.1366 86.6439 53.8463C86.6439 52.556 85.6622 51.5119 84.4491 51.5119H75.5233C74.3102 51.5119 73.3285 52.556 73.3285 53.8463C73.3285 55.1366 74.3102 56.1807 75.5233 56.1807Z"
+                                            fill="#985040"></path>
+                                        <path
+                                            d="M75.5233 75.0113H84.4491C85.6622 75.0113 86.6439 73.9672 86.6439 72.6769C86.6439 71.3866 85.6622 70.3425 84.4491 70.3425H75.5233C74.3102 70.3425 73.3285 71.3866 73.3285 72.6769C73.3285 73.9672 74.3102 75.0113 75.5233 75.0113Z"
+                                            fill="#985040"></path>
+                                        <path
+                                            d="M44.965 56.1807H95.909C102.949 56.1807 108.645 55.1366 108.645 53.8463C108.645 52.556 102.949 51.5119 95.909 51.5119H44.965C37.9254 51.5119 32.229 52.556 32.229 53.8463C32.229 55.1366 37.9254 56.1807 44.965 56.1807Z"
+                                            fill="#999999"></path>
+                                        <path
+                                            d="M44.965 75.0113H95.909C102.949 75.0113 108.645 73.9672 108.645 72.6769C108.645 71.3866 102.949 70.3425 95.909 70.3425H44.965C37.9254 70.3425 32.229 71.3866 32.229 72.6769C32.229 73.9672 37.9254 75.0113 44.965 75.0113Z"
+                                            fill="#999999"></path>
+                                        <path
+                                            d="M82.9128 47.5433L87.3025 42.8745C87.6975 42.4078 88.2681 42.1744 88.8388 42.1744C89.4094 42.1744 89.9801 42.4078 90.375 42.8745L94.7647 47.5433C95.2039 47.9636 95.4233 48.5706 95.4233 49.1775V77.3456C95.4233 78.6527 94.4578 79.68 93.2285 79.68H84.4491C83.2198 79.68 82.2542 78.6527 82.2542 77.3456V49.1775C82.2542 48.5706 82.4737 47.9636 82.9128 47.5433Z"
+                                            fill="#FFE375"></path>
+                                        <path
+                                            d="M100.144 47.5433L104.534 42.8745C104.929 42.4078 105.499 42.1744 106.07 42.1744C106.641 42.1744 107.211 42.4078 107.606 42.8745L111.996 47.5433C112.435 47.9636 112.654 48.5706 112.654 49.1775V77.3456C112.654 78.6527 111.689 79.68 110.46 79.68H101.68C100.451 79.68 99.4853 78.6527 99.4853 77.3456V49.1775C99.4853 48.5706 99.7048 47.9636 100.144 47.5433Z"
+                                            fill="#FFE375"></path>
+                                        <path
+                                            d="M82.2542 49.1775V77.3456C82.2542 78.6527 83.2198 79.68 84.449 79.68H88.8387V42.1744C88.2681 42.1744 87.6974 42.4078 87.3025 42.8745L82.9128 47.5433C82.4737 47.9636 82.2542 48.5706 82.2542 49.1775Z"
+                                            fill="#FF9F3D"></path>
+                                        <path
+                                            d="M99.4853 49.1775V77.3456C99.4853 78.6527 100.451 79.68 101.68 79.68H106.07V42.1744C105.499 42.1744 104.928 42.4078 104.534 42.8745L100.144 47.5433C99.7047 47.9636 99.4853 48.5706 99.4853 49.1775Z"
+                                            fill="#FF9F3D"></path>
+                                        <path
+                                            d="M65.2074 47.5433L69.5971 42.8745C69.992 42.4078 70.5627 42.1744 71.1333 42.1744C71.704 42.1744 72.2747 42.4078 72.6696 42.8745L77.0593 47.5433C77.4984 47.9636 77.7179 48.5706 77.7179 49.1775V77.3456C77.7179 78.6527 76.7523 79.68 75.523 79.68H66.7436C65.5144 79.68 64.5488 78.6527 64.5488 77.3456V49.1775C64.5488 48.5706 64.7683 47.9636 65.2074 47.5433Z"
+                                            fill="#FFE375"></path>
+                                        <path
+                                            d="M64.5491 49.1775V77.3456C64.5491 78.6527 65.5147 79.68 66.744 79.68H71.1337V42.1744C70.563 42.1744 69.9923 42.4078 69.5974 42.8745L65.2077 47.5433C64.7686 47.9636 64.5491 48.5706 64.5491 49.1775Z"
+                                            fill="#FF9F3D"></path>
+                                        <path
+                                            d="M47.6488 47.5433L52.0385 42.8745C52.4334 42.4078 53.0041 42.1744 53.5747 42.1744C54.1454 42.1744 54.7161 42.4078 55.111 42.8745L59.5007 47.5433C59.9398 47.9636 60.1593 48.5706 60.1593 49.1775V77.3456C60.1593 78.6348 59.1766 79.68 57.9644 79.68H46.9902V49.1775C46.9902 48.5706 47.2097 47.9636 47.6488 47.5433Z"
+                                            fill="#FFE375"></path>
+                                        <path
+                                            d="M29.7212 47.5433L34.1109 42.8745C34.5058 42.4078 35.0765 42.1744 35.6471 42.1744C36.2178 42.1744 36.7885 42.4078 37.1834 42.8745L41.5731 47.5433C42.0122 47.9636 42.2317 48.5706 42.2317 49.1775V77.3456C42.2317 78.6348 41.249 79.68 40.0368 79.68H29.0626V49.1775C29.0626 48.5706 29.2821 47.9636 29.7212 47.5433Z"
+                                            fill="#FFE375"></path>
+                                        <path
+                                            d="M46.9904 49.1775V79.68H53.575V42.1744C53.0043 42.1744 52.4336 42.4078 52.0387 42.8745L47.649 47.5433C47.2099 47.9636 46.9904 48.5706 46.9904 49.1775Z"
+                                            fill="#FF9F3D"></path>
+                                        <path
+                                            d="M29.0625 49.1775V79.68H35.6471V42.1744C35.0764 42.1744 34.5058 42.4078 34.1108 42.8745L29.7211 47.5433C29.282 47.9636 29.0625 48.5706 29.0625 49.1775Z"
+                                            fill="#FF9F3D"></path>
+                                        <path
+                                            d="M1.75781 83H118.242C119.213 83 120 82.2567 120 81.34C120 80.4232 119.213 79.68 118.242 79.68H1.75781C0.786797 79.68 0 80.4232 0 81.34C0 82.2567 0.786797 83 1.75781 83Z"
+                                            fill="#49AE4E"></path>
+                                    </svg>
+                                    <h4 class="Typography__Heading4-t8507c-3 cpGsUy mx-auto">Landscaping</h4>
+                                    <div class="Typography__BodyCopy-t8507c-7 evQnBr">Garden beds, Shrubs, Leaf cleanup
+                                        &amp; more</div>
+                                </div>
+                            </div>
+                        </label>
+                    </div>
+
+
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

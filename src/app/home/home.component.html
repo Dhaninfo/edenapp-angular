@@ -13,6 +13,7 @@
                     (change)="getServiceType($event)">
                     <option value="grass-cut">Grass Cut</option>
                     <option value="snow-removal">Snow Removal</option>
+                    <option value="yard-work">Yard Work</option>
                   </select>
                 </div>
               </div>
@@ -20,7 +21,7 @@
             <form [formGroup]="quoteForm" (ngSubmit)="onSubmit()">
               <div class="row border quote-form overflow-hidden my-5">
                 <div class="col-sm-4 p-0 border-right">
-                  <AutocompleteComponent (setAddress)="getAddress($event)" adressType="geocode"></AutocompleteComponent>
+                  <!-- <AutocompleteComponent (setAddress)="getAddress($event)" adressType="geocode"></AutocompleteComponent> -->
                   <!-- <input type="text" class="form-control p-4 border-0 rounded-0 bg-transparent"
                     placeholder="Enter your street address" #addresstext (change)="getPlaceAutocomplete()" formControlName="address"
                     [ngClass]="{ 'is-invalid': submitted && f.address.errors }"> -->

@@ -1,10 +1,12 @@
 import { Component, OnInit, AfterViewInit, TemplateRef, ElementRef, ViewChild } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from "@angular/forms";
+import { FormGroup, FormBuilder, Validators, FormControl } from "@angular/forms";
 import { StripeService, Element as StripeElement, ElementOptions, ElementsOptions } from "@nomadreservations/ngx-stripe";
 import { Stripe } from '../../_models/stripe.model';
 import { ApiService } from '../../_services/api.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { environment } from '../../../environments/environment';
+import { NgxSpinnerService } from "ngx-spinner";
+import { requireCheckboxesToBeCheckedValidator } from '../../_services/validator.service'
 declare var $: any;
 declare var google: any;
 
@@ -17,9 +19,12 @@ declare var google: any;
 export class SnowRemovalComponent implements OnInit {
   @ViewChild('mapRef', { read: ElementRef, static: true }) mapElement: ElementRef;
   @ViewChild('myModal', { static: true }) myModal: ElementRef;
+  @ViewChild('closebutton', { read: ElementRef, static: true }) closebutton: ElementRef;
+  @ViewChild('cancel', { read: ElementRef, static: true }) cancel: ElementRef;
+  wpUrl = environment.wpUrl
   snowRemovalForm: FormGroup;
   private name: string;
-   address: string;
+  address: string;
   private email: string;
   private selectedShape: any;
   private quoteData: any;
@@ -32,9 +37,10 @@ export class SnowRemovalComponent implements OnInit {
   extraOption = '';
   packageType;
   price;
-  serviceType;
+  serviceType = '';
   submitted: boolean = false;
   activeTab;
+  currentRoute: string;
   cardOptions: ElementOptions = {
     style: {
       base: {
@@ -58,6 +64,7 @@ export class SnowRemovalComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private _stripe: StripeService,
+    private spinner: NgxSpinnerService
   ) { }
 
   ngOnInit() {
@@ -67,8 +74,16 @@ export class SnowRemovalComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       phone: ['', [Validators.required]],
       driveway: ['', [Validators.required]],
-      snowRemovalFor: ['', [Validators.required]],
-      extraOptions: ['', Validators.required],
+      snowRemovalFor: new FormGroup({
+        driveway: new FormControl(false),
+        sidewalk: new FormControl(false),
+      }, requireCheckboxesToBeCheckedValidator()),
+      extraOptions: new FormGroup({
+        frontDoorWalkway: new FormControl(false),
+        stairsFrontLanding: new FormControl(false),
+        sideDoorWalkway: new FormControl(false),
+      }),
+      citySideWalk: new FormControl(false),
       amount: ['']
     });
     window.scroll(0, 0);
@@ -82,6 +97,7 @@ export class SnowRemovalComponent implements OnInit {
         }
       });
     }).scroll();
+    this.currentRoute = this.router.url.split('#')[0];
   }
 
   ngAfterViewInit() {
@@ -93,6 +109,7 @@ export class SnowRemovalComponent implements OnInit {
   }
   get f() { return this.snowRemovalForm.controls; }
   async onMapsReady() {
+    this.spinner.show();
     await this.api.selectedServices.subscribe(
       message => {
         if (message) {
@@ -100,11 +117,11 @@ export class SnowRemovalComponent implements OnInit {
           this.address = this.quoteData[0];
           this.name = this.quoteData[1];
           this.email = this.quoteData[2];
-          if (this.name!='') {
+          if (this.name != '') {
             var fullName = this.name.split(' '),
-            firstName = fullName[0],
-            lastName = fullName[fullName.length - 1];
-            this.snowRemovalForm.patchValue({ fname: firstName,lname:lastName, email: this.email });
+              firstName = fullName[0],
+              lastName = fullName[fullName.length - 1];
+            this.snowRemovalForm.patchValue({ fname: firstName, lname: lastName, email: this.email });
           }
         }
       })
@@ -125,7 +142,6 @@ export class SnowRemovalComponent implements OnInit {
       zoomControl: false
     });
     const geocoder = new google.maps.Geocoder();
-    // this.address = '6020 North Bay Rd. Miami Beach, FL'
     geocoder.geocode({ address: this.address }, (results, status) => {
       if (status === "OK") {
         map.setCenter(results[0].geometry.location);
@@ -144,6 +160,7 @@ export class SnowRemovalComponent implements OnInit {
 
       }
     });
+    this.spinner.hide();
     var polyOptions = {
       strokeWeight: 0,
       fillOpacity: 0.45,
@@ -233,6 +250,7 @@ export class SnowRemovalComponent implements OnInit {
       this.price = null;
     }
   }
+
   calcar() {
     if (!this.shapeSize) {
       return
@@ -241,6 +259,7 @@ export class SnowRemovalComponent implements OnInit {
     this.getAutometedDrivawayPrice(area);
     document.getElementById("area").innerHTML = 'Area is :' + area.toFixed(2) + ' sqft';
   }
+
   getAutometedDrivawayPrice(area) {
     if (area > 0 && area < 600) {
       this.driveway_size = 2;
@@ -254,8 +273,65 @@ export class SnowRemovalComponent implements OnInit {
       this.driveway_size = 10;
     }
     this.snowRemovalForm.patchValue({ driveway: this.driveway_size })
-    this.extraOption = '';
+    this.resetExtraOptions();
     this.packageType = '';
+    this.price = this.getDriveWayPrices()[this.driveway_size];
+  }
+
+
+  changeServiceType(value) {
+    if (this.serviceType.indexOf(value) != -1) {
+      var values = this.serviceType.split(',');
+      for (var i = 0; i < values.length; i++) {
+        if (values[i] == value) {
+          values.splice(i, 1);
+          this.serviceType = values.join(',');
+        }
+      }
+    } else {
+      this.serviceType = this.serviceType + ',' + value;
+    }
+    // this.serviceType = value;
+    this.packageType = '';
+    this.resetExtraOptions();
+    this.driveway_size = '';
+    this.activeTab = '';
+    this.price = ''
+  }
+
+  changeActiveTab(type) {
+    this.activeTab = type;
+    setTimeout(() => {
+      if ((this.serviceType.indexOf('driveway') != -1) && this.activeTab == 'mark_area' && !this.price) {
+        this.myModal.nativeElement.click();
+      }
+    }, 15000);
+  }
+
+  enterDetailsManuly() {
+    this.activeTab = 'enter_manually';
+    this.cancel.nativeElement.click();
+  }
+
+  changeDriveWaySize(event) {
+    this.driveway_size = event.target.value;
+    this.resetExtraOptions();
+    this.calculatePrice();
+  }
+  getPackage(type) {
+    this.packageType = type;
+    this.extraOption = '';
+    this.resetExtraOptions();
+    this.price = +this.getDriveWayPrices()[this.driveway_size];
+  }
+  resetExtraOptions() {
+    this.extraOption = ''
+    Object.keys(this.snowRemovalForm.controls.extraOptions['controls']).forEach(key => {
+      this.snowRemovalForm.controls.extraOptions['controls'][key].setValue(false);
+    });
+    this.snowRemovalForm.controls.citySideWalk.setValue(false);
+  }
+  calculatePrice() {
     this.price = this.getDriveWayPrices()[this.driveway_size];
   }
   cardUpdated(result) {
@@ -267,9 +343,9 @@ export class SnowRemovalComponent implements OnInit {
   keyUpdated() {
     this._stripe.changeKey(this.stripeKey);
   }
+
   async getCardToken() {
     this.submitted = true;
-
     //prevent to submit form if any error occurs.
     if (this.packageType == '') {
       return;
@@ -280,34 +356,55 @@ export class SnowRemovalComponent implements OnInit {
     }
     console.log(this.snowRemovalForm.value);
   }
-  changeService(event) {
-    this.serviceType = event.target.value;
-    this.driveway_size = '';
-    this.activeTab = '';
-    this.price=''
+  changeService(seviceType) {
+    this.serviceType = this.address + '|' + this.name + '|' + this.email;
+    this.api.addService(this.serviceType);
+    this.closebutton.nativeElement.click();
+    this.router.navigate(['/get-a-quote/' + seviceType]);
   }
-  changeActiveTab(type) {
-    this.activeTab = type;
-    setTimeout(() => {
-      if ((this.serviceType == 'driveway' || this.serviceType == 'both') && this.activeTab == 'mark_area' && !this.price) {
-        this.myModal.nativeElement.click();
+  changeExtraOptions(option) {
+    if (this.extraOption.indexOf(option) != -1) {
+      var values = this.extraOption.split(',')
+      for (var i = 0; i < values.length; i++) {
+        if (values[i] == option) {
+          values.splice(i, 1);
+          this.extraOption = values.join(',');
+        }
       }
-    }, 15000);
+      if (!this.snowRemovalForm.controls.citySideWalk.value && values.length == 0) {
+        this.price = +this.getDriveWayPrices()[this.driveway_size];
+      }
+      if (this.snowRemovalForm.controls.citySideWalk.value && values.length == 0) {
+        this.price = +this.price - 10;
+      }
+    } else {
+      this.extraOption = (this.extraOption + ',' + option).replace(/^,/, '');
+      var values = this.extraOption.split(',')
+      if (!this.snowRemovalForm.controls.citySideWalk.value && values.length == 1) {
+        this.price = +this.price + +this.getExtraOptionsPrices()[this.driveway_size];
+      }
+      if (this.snowRemovalForm.controls.citySideWalk.value && values.length == 1) {
+        this.price = +this.price + 10;
+      }
+    }
   }
-  enterDetailsManuly() {
-    this.activeTab = 'enter_manually';
-    document.getElementById('cancel').click();
-  }
-  changeDriveWaySize(event) {
-    this.driveway_size = event.target.value;
-    this.calculatePrice();
-  }
-  getPackage(type) {
-    this.packageType = type;
-    this.extraOption = '';
-  }
-  calculatePrice() {
-    this.price = this.getDriveWayPrices()[this.driveway_size];
+  changecitySideWalk() {
+    if (this.snowRemovalForm.controls.citySideWalk.value && this.extraOption == '') {
+      this.price = +this.price + +this.getExtraOptionsPrices()[this.driveway_size];
+    }
+
+    if (this.snowRemovalForm.controls.citySideWalk.value && this.extraOption != '') {
+      this.price = +this.price + 10;
+    }
+
+    if (!this.snowRemovalForm.controls.citySideWalk.value && this.extraOption == '') {
+      this.price = +this.getDriveWayPrices()[this.driveway_size];
+    }
+
+    if (!this.snowRemovalForm.controls.citySideWalk.value && this.extraOption != '') {
+      this.price = +this.price - 10;
+    }
+
   }
   getDriveWayPrices() {
     return {

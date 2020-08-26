@@ -1,0 +1,56 @@
+.accordion-toggle:after {
+    font-family: "Glyphicons Halflings";
+    content: "\e114";
+    float: right;
+    color: #ffffff;
+    height: 24px;
+    width: 40px;
+    background-color: #2ecc71;
+    font-size: 14px;
+}
+
+.accordion-toggle[aria-expanded="true"]:after {
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    content: "\f068";
+    border-radius: 50%;
+    height: 28px;
+    width: 28px;
+    padding-top: 4px;
+}
+
+.accordion-toggle[aria-expanded="false"]:after {
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    content: "\f067";
+    border-radius: 50%;
+    height: 28px;
+    width: 28px;
+    padding-top: 4px;
+}
+.service-image{
+    height: 76px;
+    width:75px;
+}
+.show-image {
+	position: relative;
+	display: inline-block;
+}
+
+.show-image:hover .delete {
+	display: block;
+}
+.show-image:hover img {
+	opacity: 0.5;
+}
+.delete {
+	position: absolute;
+	right: 5px;
+    top: -1px;
+    display: none;
+    cursor: pointer;
+}
+
+.delete a {
+	color: red;
+}

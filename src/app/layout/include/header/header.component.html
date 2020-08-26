@@ -1,16 +1,49 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-white mynav py-4 px-5 shadow">
-    <a class="navbar-brand text-white" href="/home"><img src="../../../../dev/assets/images/logo.jpg"
-            class="img-fluid"></a>
-    <button class="navbar-toggler bg-light" type="button" data-toggle="collapse" data-target="#navbarNav"
-        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="navbar-collapse">
-
-        <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-                <a class="nav-link" href="tel:+18667763336">1-866-776-3336</a> </li>
-
-        </ul>
+<header>
+  <div class="Service-container px-sm-0">
+    <div class="row">
+      <div class="col-sm-3 col-6 pt-3 pb-4">
+        <a [href]="wpUrl" class="navbar-brand"><img src="../../../../assets/images/logo.jpg" class="img-fluid"></a>
+      </div>
     </div>
-</nav>
+    <div class="row mx-sm-0">
+      <div class="col-sm-12 px-0">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark py-0 pr-0 main-nav top-navbar main-navbar"
+          data-toggle="sticky-onscroll">
+          <button class="navbar-toggler my-2" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+              <li class="nav-item dropdown">
+                <a class="nav-link dropbtn" href="javascript:void(0);">Services  <i class="fa fa-caret-down" aria-hidden="true"></i></a>
+                <div class="dropdown-content">
+                  <a href="{{wpUrl}}/grass-cutting/">Grass Cutting</a>
+                  <a href="{{wpUrl}}/landscaping/">Landscaping</a>
+                </div>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{wpUrl}}/about-us/">About Us</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link " href="{{wpUrl}}/gallery-grid/">Gallery</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link " href="{{wpUrl}}/contact-us/">Contact Us</a>
+              </li>
+            </ul>
+          </div>
+          <nav class="contact-no">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link" href="tel:+18667763336"><img src="../../../../assets/images/phone.png"
+                    class="mr-4"> 1-866-776-3336</a>
+              </li>
+            </ul>
+          </nav>
+        </nav>
+      </div>
+    </div>
+
+  </div>
+</header>

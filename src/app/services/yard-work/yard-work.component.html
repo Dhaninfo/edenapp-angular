@@ -1,249 +1,148 @@
-<form [formGroup]="snowRemovalForm" (ngSubmit)="getCardToken()">
-    <section class="Service py-5 px-4">
+
+<!-- Modal -->
+<form [formGroup]="yardWorkForm">
+    <section class="Service py-5 px-4" id="Propertydetails">
         <div class="container-fluid">
             <div class="row mx-0">
                 <div class="Service-container">
                     <div class="row mx-0">
                         <div class="col-sm-8 pt-2">
                             <div class="card border-0 shadow-sm p-5 Service-left">
-                                <div id="Propertydetails" class="page-section">
-                                    <h2 class="text-center">Book Your Eden Pro For Snow Removal!</h2>
-                                    <div class="text-center pb-3">
+                                <div class="page-section">
+                                    <h2 class="text-center">Book Your Eden Pro For Yard Work!</h2>
+                                    <div class="text-center py-3">
                                         <a class="btn btn-link" data-toggle="modal" data-target="#exampleModal">Looking
                                             to order a different service? Click here</a>
                                     </div>
                                     <div class="row">
-                                        <div class="col-sm-10 offset-sm-1 mb-3 text-center">
-                                            <label class="font-weight-bold"> Snow Removal For</label><br />
-                                            <div class="form-group" formGroupName="snowRemovalFor">
-                                                <label class="radio-inline pr-5 custom-checkbox"><input type="checkbox"
-                                                        formControlName="driveway" value="driveway"
-                                                        (change)="changeServiceType('driveway')"
-                                                        class="custom-control-input"><span
-                                                        class="pl-1 custom-control-label custom-checkbox-label">Driveway</span></label>
-                                                <label class="radio-inline pr-2 custom-checkbox"><input type="checkbox"
-                                                        formControlName="sidewalk" value="sidewalk"
-                                                        (change)="changeServiceType('sidewalk')"
-                                                        class="custom-control-input"><span
-                                                        class="pl-1 custom-control-label custom-checkbox-label">Sidewalk</span></label>
+                                        <div class="col-sm-6 offset-sm-3">
+                                            <label class="font-weight-bold w-100 text-center">Budget Amount</label>
+                                            <div class="position-relative">
+                                                <!-- <span class="doller-icon position-absolute">$</span>    -->
+                                                <!-- <input type="text" class="form-control py-4 pl-5" placeholder="Enter Your Budget Amount"> -->
+                                                <select class="form-control">
+                                                    <option value="grass-cut">Less than $100</option>
+                                                    <option value="snow-removal">$200 To $300</option>
+                                                    <option value="yard-work">$300 To $400</option>
+                                                    <option value="landscaping">Above $400</option>
+                                                </select>
                                             </div>
-                                            <div *ngIf="submitted && f.snowRemovalFor.errors" class="text-danger">
-                                                <div *ngIf="f.snowRemovalFor.errors.requireOneCheckboxToBeChecked">This
-                                                    field is required.
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="Servicedetails" class="page-section">
+
+
+                                    <h5 class="text-center font-weight-bold my-4">Pick The package that works for your
+                                    </h5>
+                                    <hr class="m-auto">
+                                    <p class="text-center font-weight-bold my-4">
+                                        What yard work services do you need? Please note all work will be quoted
+                                        on-site.
+                                    </p>
+                                    <div class="row yard-services shadow-sm">
+                                        <div class="col-sm-4 py-3 border-right">
+                                            <div class="card border-0">
+                                                <img src="../../../../assets/images/yard-work.jpg" class="img-fluid">
+                                                <h5 class="font-weight-bold text-dark text-center mt-2">Yard Work</h5>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-8 border-left">
+                                            <div class="row py-3">
+                                                <div class="col-sm-6"
+                                                    *ngFor="let subServe of subServices;let i = index;">
+                                                    <div class="card border-0">
+                                                        <div class="form-group mb-2">
+                                                            <div class="custom-control custom-checkbox">
+                                                                <input type="checkbox" (click)="getData($event)"
+                                                                    value="{{subServe}}" class="custom-control-input"
+                                                                    id="{{subServe}}">
+                                                                <label class="custom-control-label "
+                                                                    for="{{subServe}}">{{subServe}}</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row" *ngIf="serviceType && serviceType.indexOf('driveway') != -1">
-                                        <div class="col-sm-10 offset-sm-1">
 
-                                            <ul class="nav nav-pills pills-dark mb-3 " id="pills-tab" role="tablist">
-                                                <li class="nav-item ">
-                                                    <a class="nav-link text-center"
-                                                        [ngClass]="{ 'active':activeTab==='mark_area'}"
-                                                        data-toggle="pill" href="#pills-home" role="tab"
-                                                        (click)="changeActiveTab('mark_area')"
-                                                        aria-controls="pills-home" aria-selected="true">Mark Areas To Be
-                                                        Serviced</a>
-                                                </li>
-                                                <li class="nav-item ">
-                                                    <a class="nav-link text-center" id="pills-profile-tab"
-                                                        data-toggle="pill" href="#pills-profile" role="tab"
-                                                        (click)="changeActiveTab('enter_manually')"
-                                                        [ngClass]="{ 'active':activeTab==='enter_manually'}"
-                                                        aria-controls="pills-profile" aria-selected="false">Enter
-                                                        Details Manually</a>
-                                                </li>
-
-                                            </ul>
-
-                                        </div>
-                                    </div>
-
-                                    <div class="tab-content" id="pills-tabContent">
-                                        <div class="tab-pane fade text-center" id="pills-home"
-                                            [ngClass]="{ 'active show':activeTab==='mark_area'}" role="tabpanel"
-                                            aria-labelledby="pills-home-tab">
-                                            <!-- Mark Areas To Be Serviced -->
-
-                                            <div class="row my-5">
-                                                <div class="col-md-12 mx-auto">
-                                                    <h4 class="text-left">Mark Your Driveway Area</h4>
-                                                    <div class="card mt-3">
-                                                        <div class="card-body">
-                                                            
-                                                            <div #mapRef style="width:100%;height:400px"></div>
-                                                            <div class="row mt-3">
-                                                                <div class="col-md-4">
-                                                                    <div id="area"></div>
-                                                                </div>
-                                                                <div class="col-md-8 text-right">
-                                                                    <button class="btn btn-secondary mr-2"
-                                                                        id="draw">Draw</button>
-
-                                                                    <button class="btn btn-secondary mr-2"
-                                                                        id="calculate" (click)="calcar()">Click Here To
-                                                                        Calculate Area</button>
-                                                                    <button class="btn btn-secondary mr-2"
-                                                                        id="stop">Clear</button>
+                                                <div class="col-sm-12 serices-info">
+                                                    <div id="yardwork" class="myaccordion" style="display: none;">
+                                                        <div class="card" *ngFor="let selectedServ of selectedServices">
+                                                            <div class="card-header hide" id="headingOne">
+                                                                <h2 class="mb-0">
+                                                                    <button
+                                                                        class="d-flex align-items-center justify-content-between btn"
+                                                                        data-toggle="collapse"
+                                                                        data-target="#yardworkOne" aria-expanded="true"
+                                                                        aria-controls="collapseOne">
+                                                                        {{selectedServ}}
+                                                                        <span class="fa-stack fa-sm">
+                                                                            <i class="fas fa-circle fa-stack-2x"></i>
+                                                                            <i
+                                                                                class="fas fa-plus fa-stack-1x fa-inverse"></i>
+                                                                        </span>
+                                                                    </button>
+                                                                </h2>
+                                                            </div>
+                                                            <div id="yardworkOne" class="collapse hide"
+                                                                aria-labelledby="headingOne" data-parent="#yardwork">
+                                                                <div class="card-body px-0">
+                                                                    <div class="row">
+                                                                        <div class="col-sm-8 pr-0">
+                                                                            <input type="text" class="form-control"
+                                                                                placeholder="Describe Your Requirements (Optional)">
+                                                                        </div>
+                                                                        <div class="col-sm-4 hide">
+                                                                            <div
+                                                                                class="file-div btn btn-success btn-block">
+                                                                                Upload Photo
+                                                                                <input type="file"
+                                                                                    id="{{selectedServ}}_photos"
+                                                                                    (change)="onFileChange($event)"
+                                                                                    name="file" class="file" />
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-sm-12 pt-3">
+                                                                            <div class="upload-img"
+                                                                                *ngFor="let url of previewUrl">
+                                                                                <button type="button" class="close"
+                                                                                    data-dismiss="modal"
+                                                                                    aria-label="Close" #closebutton>
+                                                                                    <span
+                                                                                        aria-hidden="true">&times;</span>
+                                                                                </button>
+                                                                                <img [src]="url" class="img-fluid"
+                                                                                    width="100%" height="100%"
+                                                                                    alt="Image">
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="tab-pane fade" id="pills-profile" role="tabpanel"
-                                            [ngClass]="{ 'active':activeTab==='enter_manually'}"
-                                            aria-labelledby="pills-profile-tab">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row" *ngIf="serviceType">
-                                    <div class="col-sm-10 offset-sm-1 mb-3">
-                                        <label class="font-weight-bold">Up to how many cars fit in your
-                                            driveway?</label>
-                                        <div class="border rounded rounded-lg p-2">
-                                            <select class="form-control border-0" formControlName="driveway"
-                                                (change)="changeDriveWaySize($event)">
-                                                <option value=""></option>
-                                                <option value="2">2 or less</option>
-                                                <option value="4">4 or less</option>
-                                                <option value="5">6 or less</option>
-                                                <option value="8">8 or less</option>
-                                                <option value="10">10 or less</option>
-                                            </select>
-                                        </div>
-                                        <div *ngIf="submitted && f.driveway.errors" class="text-danger">
-                                            <div *ngIf="f.driveway.errors.required">The driveway size is
-                                                required.</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div id="Servicedetails" class="page-section">
-                                    <h2 class="text-center mt-4 mb-4">Service Details</h2>
-                                    <hr class="m-auto">
-                                    <p class="text-center font-weight-bold my-4">
-                                        How often do you want us to clear your snow? Please note automated snow<br>
-                                        removal is sent when
-                                        there is 2 inches or 5 centimetres of snow accumulation.<br> Price is per
-                                        service.
-                                    </p>
 
-
-                                    <div class="row">
-                                        <div class="col-sm-6 price-tab">
-                                            <a href="javascript:void(0);" (click)="getPackage('automated')">
-                                                <div class="card p-4 text-center shadow-sm"
-                                                    [class.border-class]="packageType=='automated'">
-                                                    <p class="font-weight-bold text-dark">Automated</p>
-                                                    <p class="text-secondary mt-2 mb-0">Snow removal any time there is
-                                                        2” or 5cm of snow
-                                                        accumulation</p>
-                                                </div>
-                                            </a>
-                                        </div>
-                                        <div class="col-sm-6 price-tab">
-                                            <a href="javascript:void(0);" (click)="getPackage('one_time')">
-                                                <div class="card p-4 text-center shadow-sm"
-                                                    [class.border-class]="packageType=='one_time'">
-                                                    <p class="font-weight-bold text-dark">One-Time</p>
-                                                    <p class="text-secondary mt-2 mb-0">One time snow removal</p>
-                                                </div>
-                                            </a>
                                         </div>
 
                                     </div>
-
-                                    <p class="text-center mt-4 font-weight-bold"
-                                        *ngIf="serviceType &&  serviceType.indexOf('sidewalk') != -1">Do you need extra
-                                        options?</p>
-                                    <p class="text-center mb-4"
-                                        *ngIf="serviceType &&  serviceType.indexOf('sidewalk') != -1">Please
-                                        note all extra options will be quoted on-site.
-                                    </p>
-                                    <div class="row" *ngIf="serviceType &&  serviceType.indexOf('sidewalk') != -1">
-                                        <div class="form-group col-sm-12 row pr-0" formGroupName="extraOptions">
-                                            <div class="col-sm-4 price-tab">
-                                                <label class="extra-options">
-                                                    <input type="checkbox" formControlName="frontDoorWalkway"
-                                                        value="frontDoorWalkway" class="card-input-element" (change)="changeExtraOptions('frontDoorWalkway')"/>
-
-                                                    <div class="card card-input" style="height:100%;">
-                                                        <div
-                                                            class="card-body text-center shadow-sm extra-options-parent">
-                                                            <p class="font-weight-bold text-dark mb-0">Front Door
-                                                                Walkway
-                                                            </p>
-                                                        </div>
-                                                    </div>
-
-                                                </label>
-                                            </div>
-                                            <div class="col-sm-4 price-tab">
-                                                <label class="extra-options">
-                                                    <input type="checkbox" formControlName="stairsFrontLanding"
-                                                        value="stairsFrontLanding" class="card-input-element" (change)="changeExtraOptions('stairsFrontLanding')"/>
-
-                                                    <div class="card card-input" style="height:100%;">
-                                                        <div
-                                                            class="card-body text-center shadow-sm extra-options-parent">
-                                                            <p class="font-weight-bold text-dark mb-0">Stairs &
-                                                                Front<br>
-                                                                Landing
-                                                            </p>
-                                                        </div>
-                                                    </div>
-
-                                                </label>
-                                            </div>
-                                            <div class="col-sm-4 price-tab pr-0">
-                                                <label class="extra-options">
-                                                    <input type="checkbox" formControlName="sideDoorWalkway"
-                                                        value="sideDoorWalkway" class="card-input-element" (change)="changeExtraOptions('sideDoorWalkway')"/>
-
-                                                    <div class="card card-input" style="height:100%;">
-                                                        <div
-                                                            class="card-body text-center shadow-sm extra-options-parent">
-                                                            <p class="font-weight-bold text-dark mb-0">Side Door Walkway
-                                                            </p>
-                                                        </div>
-                                                    </div>
-
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-12 price-tab my-3">
-                                            <label class="city_sidewalk extra-options">
-                                                <input type="checkbox" formControlName="citySideWalk"
-                                                    class="card-input-element" (change)="changecitySideWalk()"/>
-
-                                                <div class="card card-input" style="height:100%;">
-                                                    <div class="card-body text-center shadow-sm extra-options-parent">
-                                                        <p class="font-weight-bold text-dark mb-0">City Sidewalk
-                                                        </p>
-                                                    </div>
-                                                </div>
-
-                                            </label>
-                                        </div>
-                                    </div>
-
                                     <div class="row mt-4">
                                         <div class="col-sm-12">
-                                            <div class="text-center my-3"> <label class="font-weight-bold ">Is there
-                                                    anything your Eden pro
-                                                    should know?</label></div>
 
-                                            <textarea class="form-control" rows="5"
-                                                placeholder="Yoy can add a note to your Eden pro"></textarea>
-
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input"
+                                                    id="customCheckBox1">
+                                                <label class="custom-control-label font-weight-bold"
+                                                    for="customCheckBox1">Additional services your would like to add
+                                                    <img src="../../../../assets/images/info.svg"></label>
+                                            </div>
                                         </div>
                                     </div>
 
                                 </div>
                                 <div id="Contactinformation" class="page-section">
-                                    <h2 class="text-center my-5">Contact Information</h2>
+                                    <h2 class="text-center my-4">Contact Information</h2>
                                     <hr class="m-auto">
                                     <div class="row mt-4">
                                         <div class="col-sm-12">
@@ -251,10 +150,6 @@
                                             <div class="position-relativ">
                                                 <input type="text" class="form-control p-4" placeholder="name@email.com"
                                                     formControlName="email">
-                                                <div *ngIf="submitted && f.email.errors" class="text-danger">
-                                                    <div *ngIf="f.email.errors.required">Email is required.</div>
-                                                    <div *ngIf="f.email.errors.email">Please enter valid email.</div>
-                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -264,9 +159,6 @@
                                             <div class="position-relativ">
                                                 <input type="text" class="form-control p-4" placeholder="First Name"
                                                     formControlName="fname">
-                                                <div *ngIf="submitted && f.fname.errors" class="text-danger">
-                                                    <div *ngIf="f.fname.errors.required">First Name is required.</div>
-                                                </div>
                                             </div>
                                         </div>
                                         <div class="col-sm-6">
@@ -274,9 +166,6 @@
                                             <div class="position-relativ">
                                                 <input type="text" class="form-control p-4" placeholder="Last Name"
                                                     formControlName="lname">
-                                                <div *ngIf="submitted && f.lname.errors" class="text-danger">
-                                                    <div *ngIf="f.lname.errors.required">Last Name is required.</div>
-                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -285,57 +174,12 @@
                                             <label class="font-weight-bold">Phone Number</label>
                                             <div class="position-relativ">
                                                 <input type="text" class="form-control p-4" placeholder="000-000-0000"
-                                                    formControlName="phone">
-                                                <div *ngIf="submitted && f.phone.errors" class="text-danger">
-                                                    <div *ngIf="f.phone.errors.required">Phone Number is required.</div>
-                                                </div>
+                                                    formControlName="Phone">
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div id="Paymentinformation" class="page-section">
-                                    <h2 class="text-center my-5">Payment</h2>
-                                    <hr class="m-auto">
-                                    <div class="row mt-4" style="margin: 0 auto;width:100%">
-                                        <div class="col-sm-6">
-                                            <label class="font-weight-bold">First Name</label>
-                                            <div class="position-relativ">
-                                                <input type="text" class="form-control p-4" placeholder="First Name"
-                                                    formControlName="fname">
-                                                <div *ngIf="submitted && f.lname.errors" class="text-danger">
-                                                    <div *ngIf="f.lname.errors.required">First Name is required.</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <label class="font-weight-bold">Last Name</label>
-                                            <div class="position-relativ">
-                                                <input type="text" class="form-control p-4" placeholder="Last Name"
-                                                    formControlName="lname">
-                                                <div *ngIf="submitted && f.lname.errors" class="text-danger">
-                                                    <div *ngIf="f.lname.errors.required">Last Name is required.</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <input type="hidden" name="amount" value="300" formControlName="amount">
-                                        <ngx-stripe-card [options]="cardOptions" [elementsOptions]="elementsOptions"
-                                            (change)="cardUpdated($event)" (error)="error = $event"
-                                            class="mt-4 btn-block bg-light pl-2" style="margin: 0 auto;width:96%">
-                                        </ngx-stripe-card>
-                                        <div class="error" style="color:red">
-                                            {{error?.message}}
-                                        </div>
-                                    </div>
-                                    <div class="custom-control custom-checkbox mt-3">
-                                        <input type="checkbox" checked class="custom-control-input"
-                                            id="customCheckBox2">
-                                        <label class="custom-control-label font-weight-bold"
-                                            for="customCheckBox2">Billing address is the
-                                            same
-                                            as
-                                            the service address above</label>
-                                    </div>
-                                </div>
+
                                 <div class="row mt-4">
                                     <div class="col-sm-6 price-tab">
                                         <div class="p-4 rounded"
@@ -344,11 +188,10 @@
                                                 <svg width=" 30 " height="28 " viewBox="0 0 30 28 " fill="none "
                                                     xmlns="http://www.w3.org/2000/svg ">
                                                     <path d="M15 0L18.5443 10.1216L29.2658 10.3647L20.7349 16.8634L23.8168 27.1353L15 21.03L6.18322 27.1353L9.26513 16.8634L0.734152
-                                          10.3647L11.4557 10.1216L15 0Z " fill="#FFD260 "></path>
+                                            10.3647L11.4557 10.1216L15 0Z " fill="#FFD260 "></path>
                                                 </svg> Satisfaction guaranteed</p>
                                             <p class=" text-center mb-0"> <small>If you’re not fully satisfied with your
-                                                    service, we have a
-                                                    team ready to resolve any issues. </small></p>
+                                                    service, we have a team ready to resolve any issues. </small></p>
                                         </div>
                                     </div>
                                     <div class="col-sm-6 price-tab">
@@ -362,8 +205,7 @@
                                                         fill="#FFD260"></path>
                                                 </svg> We’re just an email away</p>
                                             <p class=" text-center mb-0"> <small>Do you have a question for an eden pro?
-                                                    Send us an email and
-                                                    we’ll get back to you.</small></p>
+                                                    Send us an email and we’ll get back to you.</small></p>
                                         </div>
                                     </div>
                                     <div class="col-sm-12 text-center my-5">
@@ -374,53 +216,41 @@
                                 </div>
                                 <p class="text-center text-secondary">
                                     <small>Payment due at job completion. You will receive an email with your job
-                                        details once the job is
-                                        <br>complete. You are subscribing to a recurring Eden service. By proceeding,
-                                        you are agreeing to
-                                        Eden’s<br> Terms & Conditions and Privacy Policy.</small>
+                                        details once the job is <br>complete. You are subscribing to a recurring Eden
+                                        service. By proceeding, you are agreeing to Eden’s<br> Terms & Conditions and
+                                        Privacy Policy.</small>
                                 </p>
                             </div>
                         </div>
                         <div class="col-sm-4 pt-2 px-4">
                             <div class="Service-right">
-                                <div class="card border-0 shadow-sm ">
-                                    <div class="card-header px-3 bg-white">
+                                <div class="card border-0 shadow-sm " style="width:100%;">
+                                    <div class="card-header px-3 bg-white border-0">
                                         <div class="row">
                                             <div class="col-8">
                                                 <p class="font-weight-bold mb-0">{{address}}</p>
                                             </div>
                                             <div class="col-4">
                                                 <a href="{{wpUrl}}"
-                                                    class="change-button btn btn-success btn-block font-weight-bold">Change</a>
+                                                class="change-button btn btn-success btn-block font-weight-bold">Change</a>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="position-relative ">
+                                    <div class="position-relative px-1">
                                         <div id="address_map" style="width:100%;height:220px"></div>
                                     </div>
                                     <div class="card-body map-link">
-                                        <nav class="navigation" id="mainNav">
-                                            <a class="navigation__link" href="{{currentRoute}}#Propertydetails">Property
-                                                details</a>
-                                            <a class="navigation__link" href="{{currentRoute}}#Servicedetails">Service
-                                                details</a>
-                                            <a class="navigation__link"
-                                                href="{{currentRoute}}#Contactinformation">Contact
+
+
+                                        <nav class="navigation" id="mainNav" style="display: block !important">
+                                            <!-- <a class="navigation__link active" href="#Propertydetails">Property details</a> -->
+                                            <a class="navigation__link" href="{{currentRoute}}#Servicedetails">Service details</a>
+                                            <a class="navigation__link" href="{{currentRoute}}#Contactinformation">Contact
                                                 information</a>
-                                            <a class="navigation__link"
-                                                href="{{currentRoute}}#Paymentinformation">Payment
-                                                information</a>
+
+
                                         </nav>
-                                        <div class="pricing row pt-2">
-                                            <div class="col-8">
-                                                <h5 class="text-success">Total per service</h5>
-                                            </div>
-                                            <div class="col-4">
-                                                <h5 class="text-success text-right">{{price |
-                            currency:'USD'}}</h5>
-                                            </div>
-                                            <p class="col-12 text-secondary">plus applicable taxes</p>
-                                        </div>
+
                                     </div>
                                 </div>
                             </div>
@@ -432,38 +262,17 @@
 
     </section>
 </form>
-<button #myModal data-toggle="modal" data-target="#myModal" style="display: none;">open modal</button>
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
-    data-keyboard="false" data-backdrop="static">
-    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-body">
-                <div class="py-5">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-sm-12 text-center">
-                                <p>Not able to draw area? You can enter details manually</p>
-                                <button class="btn btn-success text-center px-4"
-                                    (click)="enterDetailsManuly()">Ok</button>
-                                <button class="btn btn-secondary text-center ml-3" id="cancel" data-dismiss="modal"
-                                    #cancel>Cancel</button>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header text-center">
                 <h5 class="modal-title font-weight-bold ml-auto" id="exampleModalLabel">Type of Work</h5>
+
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close" #closebutton>
                     <span aria-hidden="true">&times;</span>
                 </button>
+
+                <span aria-hidden="true">&times;</span>
             </div>
             <div class="modal-body pb-5" style="background-color: #fafafa;">
                 <div class="grid-wrapper row mx-0">
@@ -492,9 +301,9 @@
                         </label>
                     </div>
 
-                    <div class="col-sm-6 px-1 pb-3">
+                    <div class="col-sm-6 px-1 pb-3" (click)="changeService('snow-removal')">
                         <label>
-                            <input type="radio" name="product" class="card-input-element" checked />
+                            <input type="radio" name="product" class="card-input-element" />
 
                             <div class="card card-input" style="height:100%;">
                                 <div class="card-body text-center">
@@ -518,9 +327,9 @@
                         </label>
                     </div>
 
-                    <div class="col-sm-6 px-1 pb-3" (click)="changeService('yard-work')">
+                    <div class="col-sm-6 px-1 pb-3">
                         <label>
-                            <input type="radio" name="product" class="card-input-element" />
+                            <input type="radio" name="product" class="card-input-element" checked />
 
                             <div class="card card-input" style="height:100%;">
                                 <div class="card-body text-center">

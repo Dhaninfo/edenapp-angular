@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -13,6 +14,10 @@ import { SnowRemovalComponent } from './services/snow-removal/snow-removal.compo
 import { NgxStripeModule } from '@nomadreservations/ngx-stripe';
 import { environment } from '../environments/environment';
 import { AutocompleteComponent } from './google-places/google-places.component';
+import { YardWorkComponent } from './services/yard-work/yard-work.component';
+import { NgxSpinnerModule } from "ngx-spinner";
+import { LandscapeComponent } from './services/landscape/landscape.component';
+import { AddSpacePipe } from './_services/add-space.pipe';
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,15 +27,21 @@ import { AutocompleteComponent } from './google-places/google-places.component';
     HomeComponent,
     GrassCutComponent,
     SnowRemovalComponent,
-    AutocompleteComponent
+    AutocompleteComponent,
+    YardWorkComponent,
+    LandscapeComponent,
+    AddSpacePipe
   ],
   imports: [
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
+    BrowserAnimationsModule,
     HttpClientModule,
     AppRoutingModule,
+    NgxSpinnerModule,
     NgxStripeModule.forRoot(environment.stripe_key),
+    
   ],
   providers: [],
   bootstrap: [AppComponent]

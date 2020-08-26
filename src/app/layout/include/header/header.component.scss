@@ -1,0 +1,130 @@
+.main-nav{
+  border-radius:10px;
+}
+.navbar-brand{
+  width:100%;
+}
+.nav-item{
+  padding:10px 15px;
+}
+.nav-link{
+  min-height: 40px;
+  color: #FFFFFF !important;
+  font-family: "Quicksand", Sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 22px;
+}
+.contact-no{
+  border-radius: 0 10px 10px 0;
+  position: relative;
+  right: -5px;
+  background-color:#12BC66 !important
+}
+.sticky.is-sticky {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top:0px;
+  z-index: 1000;
+  max-width: 1280px;
+  margin: auto;
+  border-radius: 0 0px 10px 10px !important;
+}
+
+@media (min-width:1280px) {
+  .Service-container {
+      max-width: 1280px;
+      margin: auto;
+  }
+  /*sticky header position*/
+
+.sticky.is-sticky .contact-no{
+  border-radius: 0 0px 10px 0px !important;;
+
+}
+}
+
+@media (min-width: 320px) and (max-width: 640px) {
+
+  .Service-container {
+    max-width:100%;
+    margin: auto;
+    padding:0 16px;
+}
+.sticky.is-sticky {
+
+  border-radius:0 !important;
+}
+.main-nav{
+  border-radius:0px;
+}
+.contact-no{
+  border-radius:0;
+  position: absolute;
+  right: 0px;
+  top:0;
+}
+.nav-item{
+  padding:8px 15px;
+}
+.navbar-collapse{
+  margin-left: -16px;
+  background: rgb(255, 255, 255);
+
+}
+.navbar-collapse .nav-link{
+  color: #0a0a0a !important;
+  font-size: 18px;
+  font-weight: normal;
+  line-height: 22px;
+}
+}
+
+.main-navbar{
+  background-color:#333333;
+}
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #FFFFFF;
+  min-width: 250px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  left: 17px;
+  top: 60px;
+  border-radius: 10px 10px 10px 10px;
+}
+
+.dropdown-content a {
+  padding:10px !important;
+  text-decoration: none;
+  display: block;
+  color: #333333;
+  font-family: "Quicksand", Sans-serif;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.dropdown-content a:hover {color: #12BC66;}
+// .navbar-nav li:hover {
+//   border-bottom: 3px solid #12BC66;
+//   -webkit-transition: 1s all ease;
+//   transition: 1s all ease;
+// }
+.navbar-nav li::after {
+  content: '';
+  display: block;
+  width: 0;
+  height: 3px;
+  background:  #12BC66;
+  transition: width .3s;
+}
+
+.navbar-nav li:hover::after {
+  width: 100%;
+  //transition: width .3s;
+}
+
+.dropdown:hover .dropdown-content {display: block;}
+// .dropdown:hover .dropbtn {background-color: #3e8e41;}

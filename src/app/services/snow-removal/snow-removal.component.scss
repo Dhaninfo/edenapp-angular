@@ -10,9 +10,8 @@
 .card-input {
     margin: 10px;
     padding: 00px;
-    border:2px solid #eee;
-    box-shadow: 8px 8px 16px 0 rgba(0, 0, 0, 0.05),
-      -8px -8px 12px 0 rgba(255, 255, 255, 0.1);
+    border: 2px solid #eee;
+    box-shadow: 8px 8px 16px 0 rgba(0, 0, 0, 0.05), -8px -8px 12px 0 rgba(255, 255, 255, 0.1);
 }
 
 .card-input:hover {
@@ -20,7 +19,7 @@
 }
 
 .card-input-element:checked + .card-input {
-    border:2px solid #2ecc71;
+    border: 2px solid #2ecc71;
 }
 .cpGsUy {
     color: rgb(64, 64, 64);
@@ -44,7 +43,7 @@
 .text-brand-orange {
     --text-opacity: 1;
     color: #f76800;
-    color: rgba(247,104,0,var(--text-opacity));
+    color: rgba(247, 104, 0, var(--text-opacity));
 }
 
 .fill-current {
@@ -53,14 +52,43 @@
 .text-brand-teal {
     --text-opacity: 1;
     color: #14b3b6;
-    color: rgba(20,179,182,var(--text-opacity));
+    color: rgba(20, 179, 182, var(--text-opacity));
 }
 
 .text-brand-lightgreen {
     --text-opacity: 1;
     color: #49ae4e;
-    color: rgba(73,174,78,var(--text-opacity));
-} 
-.city_sidewalk{
+    color: rgba(73, 174, 78, var(--text-opacity));
+}
+.city_sidewalk {
     width: 100%;
+}
+.custom-checkbox-label {
+    padding-top: 3px !important;
+}
+.extra-options {
+    display: unset !important;
+}
+.border-class{
+    border: 2px solid #49ae4e !important;
+}
+.extra-options-parent {
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-flex-wrap: nowrap;
+    -ms-flex-wrap: nowrap;
+    flex-wrap: nowrap;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-align-content: stretch;
+    -ms-flex-line-pack: stretch;
+    align-content: stretch;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
 }

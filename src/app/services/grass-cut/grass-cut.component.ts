@@ -1,10 +1,11 @@
 import { Component, OnInit, AfterViewInit, TemplateRef, ElementRef, ViewChild } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from "@angular/forms";
+import { FormGroup, FormBuilder, Validators, FormControl } from "@angular/forms";
 import { StripeService, Element as StripeElement, ElementOptions, ElementsOptions } from "@nomadreservations/ngx-stripe";
 import { Stripe } from '../../_models/stripe.model';
 import { ApiService } from '../../_services/api.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { environment } from '../../../environments/environment';
+import { NgxSpinnerService } from "ngx-spinner";
 declare var $: any;
 declare var google: any;
 
@@ -15,9 +16,11 @@ declare var google: any;
 })
 export class GrassCutComponent implements OnInit {
   @ViewChild('mapRef', { read: ElementRef, static: true }) mapElement: ElementRef;
+  @ViewChild('closebutton', { read: ElementRef, static: true }) closebutton: ElementRef;
+  wpUrl = environment.wpUrl
   grassCutForm: FormGroup;
   private name: string;
-   address: string;
+  address: string;
   private email: string;
   private quoteData: any;
   element: StripeElement;
@@ -33,6 +36,8 @@ export class GrassCutComponent implements OnInit {
   price;
   subPackageType;
   submitted: boolean = false
+  serviceType;
+  currentRoute: string;
   cardOptions: ElementOptions = {
     style: {
       base: {
@@ -56,6 +61,7 @@ export class GrassCutComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private _stripe: StripeService,
+    private spinner: NgxSpinnerService
   ) { }
 
   ngOnInit() {
@@ -65,7 +71,13 @@ export class GrassCutComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       phone: ['', [Validators.required]],
       area: ['', [Validators.required]],
-      extraOptions: ['', Validators.required],
+      extraOptions: new FormGroup({
+        initial: new FormControl(false),
+        fallCleanup: new FormControl(false),
+        gardenBeds: new FormControl(false),
+        shrubs: new FormControl(false),
+        leafCleanup: new FormControl(false)
+      }),
       amount: ['']
     });
     window.scroll(0, 0);
@@ -79,6 +91,7 @@ export class GrassCutComponent implements OnInit {
         }
       });
     }).scroll();
+    this.currentRoute = this.router.url.split('#')[0];
   }
   ngAfterViewInit() {
     (<any>window).googleMapsReady = this.onMapsReady.bind(this);
@@ -88,7 +101,7 @@ export class GrassCutComponent implements OnInit {
     script.src = "https://maps.googleapis.com/maps/api/js?key=" + environment.googleAPIKey + "&libraries=places&callback=googleMapsReady&libraries=geometry,drawing";
 
   }
-  get f() { return this.grassCutForm.controls; }
+
   async onMapsReady() {
     await this.api.selectedServices.subscribe(
       message => {
@@ -97,11 +110,11 @@ export class GrassCutComponent implements OnInit {
           this.address = this.quoteData[0];
           this.name = this.quoteData[1];
           this.email = this.quoteData[2];
-          if (this.name!='') {
+          if (this.name != '') {
             var fullName = this.name.split(' '),
-            firstName = fullName[0],
-            lastName = fullName[fullName.length - 1];
-            this.grassCutForm.patchValue({ fname: firstName,lname:lastName, email: this.email });
+              firstName = fullName[0],
+              lastName = fullName[fullName.length - 1];
+            this.grassCutForm.patchValue({ fname: firstName, lname: lastName, email: this.email });
           }
         }
       })
@@ -124,8 +137,6 @@ export class GrassCutComponent implements OnInit {
           icon: '../../../../assets/images/map50x50.png',
           position: results[0].geometry.location
         });
-      } else {
-
       }
     });
     var marker = new google.maps.Marker({
@@ -135,7 +146,9 @@ export class GrassCutComponent implements OnInit {
     marker.setMap(map);
 
   }
+  get f() { return this.grassCutForm.controls; }
   getPropertyDetails(address) {
+    this.spinner.show();
     this.api.getPropertyDetails(address).subscribe((data: any) => {
 
       this.propertyObj = data;
@@ -155,9 +168,11 @@ export class GrassCutComponent implements OnInit {
         this.automatedPrice = true;
         this.grassCutForm.patchValue({ area: this.property_size });
         this.packageType = 'weekly';
-        this.getPackageType('basic');
+        this.getPackageType('basic',true);
+        this.spinner.hide();
       } else {
-        this.grassCutForm.patchValue({ area: ''});
+        this.grassCutForm.patchValue({ area: '' });
+        this.spinner.hide();
       }
     })
   }
@@ -165,11 +180,20 @@ export class GrassCutComponent implements OnInit {
     this.property_size = event.target.value;
     this.packageType = '';
     this.subPackageType = '';
+    this.extraOption = '';
+    Object.keys(this.grassCutForm.controls.extraOptions['controls']).forEach(key => {
+      this.grassCutForm.controls.extraOptions['controls'][key].setValue(false)
+    });
     this.price = '';
   }
 
   getPackage(type) {
+    this.automatedPrice = false
     this.packageType = type;
+    this.extraOption = '';
+    Object.keys(this.grassCutForm.controls.extraOptions['controls']).forEach(key => {
+      this.grassCutForm.controls.extraOptions['controls'][key].setValue(false)
+    });
     this.subPackageType = '';
     this.price = '';
   }
@@ -185,7 +209,6 @@ export class GrassCutComponent implements OnInit {
     } else {
       this.extraOption = this.extraOption + ',' + option;
     }
-    // consolse.log(this.extraOption);
   }
   cardUpdated(result) {
     this.element = result.element;
@@ -210,10 +233,21 @@ export class GrassCutComponent implements OnInit {
     console.log(this.grassCutForm.value);
     return;
   }
-  getPackageType(package_type) {
+  getPackageType(package_type,isAutomated=false) {
+    if(!isAutomated){
+      this.automatedPrice = false
+    }
     this.subPackageType = package_type;
     this.price = (this.packageType != undefined && this.property_size != undefined) ? this.getPrices()[this.property_size][this.packageType][package_type] : '';
   }
+
+  changeService(seviceType) {
+    this.serviceType = this.address + '|' + this.name + '|' + this.email;
+    this.api.addService(this.serviceType);
+    this.closebutton.nativeElement.click();
+    this.router.navigate(['/get-a-quote/' + seviceType]);
+  }
+
   getPrices() {
     return {
       2500: {
